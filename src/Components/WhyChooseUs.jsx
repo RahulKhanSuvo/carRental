@@ -34,9 +34,18 @@ const WhyChooseUs = () => {
     <div className="py-16 bg-gray-100">
       <div className="lg:container mx-auto px-4 text-center">
         <img className="w-full" src={carBg} alt="" />
-        <h2 className="text-4xl font-bold mb-8 text-gray-800">
-          Why Choose Us?
-        </h2>
+        <h2 className="text-xl font-bold mb-8 text-gray-800">Why Choose Us?</h2>
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="text-4xl font-bold">
+            Best valued deals you will ever find
+          </h2>
+          <p className=" max-w-2xl text-gray-600">
+            Discover unbeatable prices on a wide range of vehicles. Whether
+            you’re looking for budget-friendly options or premium cars, we
+            ensure top value for every ride. Book today and experience the
+            difference!
+          </p>
+        </div>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {points.map((point, index) => (
             <div
