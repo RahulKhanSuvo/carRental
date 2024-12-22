@@ -3,7 +3,7 @@ import logo from "../assets/Logo/logo_v4.png";
 const NavBar = () => {
   const links = (
     <>
-      <NavLink>Home</NavLink>
+      <NavLink to={"/"}>Home</NavLink>
       <NavLink> Available Cars</NavLink>
       <NavLink> Add Car</NavLink>
       <NavLink> My Cars</NavLink>
@@ -12,7 +12,7 @@ const NavBar = () => {
   );
   return (
     <nav>
-      <div className="flex lg:container mx-auto justify-between items-center">
+      <div className="flex lg:container py-6 mx-auto justify-between items-center">
         <img className="w-36" src={logo} alt="" />
         <div className="flex gap-5">{links}</div>
         <div>

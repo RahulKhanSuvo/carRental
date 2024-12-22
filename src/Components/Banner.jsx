@@ -16,7 +16,7 @@ const Banner = () => {
         <div className="flex flex-col items-center justify-center h-full text-center">
           <div className="max-w-4xl">
             <p className="font-bold text-[#FF3600]">Welcome To Car Rental</p>
-            <h1 className="text-4xl text-white md:text-6xl font-bold mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl text-white lg:text-7xl font-bold mb-6 drop-shadow-lg">
               Looking to save more on your rental car?
             </h1>
             <p className="text-lg text-white md:text-xl mb-6">
