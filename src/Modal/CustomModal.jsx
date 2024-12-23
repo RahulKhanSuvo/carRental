@@ -16,7 +16,6 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     availability,
     features,
   } = onlyCar;
-  console.log(description);
   if (!isOpen) return null;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,7 +133,6 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     }
   };
 
-  // Helper function to validate URL
   const isValidUrl = (url) => {
     const pattern = new RegExp(
       "^(https?:\\/\\/)?([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}|localhost)(:\\d+)?(\\/.*)?$"
