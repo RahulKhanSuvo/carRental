@@ -1,24 +1,36 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
+import CustomModal from "../Modal/CustomModal";
 
 const MyCar = () => {
   const { user } = useAuth();
   const [cars, setCars] = useState([]);
+  const [onlyCar, setOnlyCar] = useState([]);
 
-  // Fetch user's cars
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/myCar/${user.email}`)
       .then((res) => setCars(res.data));
-  }, [user.email]);
+  }, [user.email, isModalOpen]);
 
   // Handle delete action
   const handleDelete = async (id) => {};
 
   // Handle edit action
-  const handleEdit = (id) => {
-    // Redirect to the edit page or handle edit logic here
+
+  const handelUpdate = async (id) => {
+    console.log(id);
+
+    try {
+      const { data } = await axios.get(`http://localhost:5000/viewCar/${id}`);
+      setOnlyCar(data);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -66,7 +78,7 @@ const MyCar = () => {
                     </button>
                     <button
                       className="bg-blue-500 text-white px-4 py-2 rounded"
-                      onClick={() => handleEdit(car._id)}
+                      onClick={() => handelUpdate(car._id)}
                     >
                       Edit
                     </button>
@@ -82,6 +94,11 @@ const MyCar = () => {
             )}
           </tbody>
         </table>
+        <CustomModal
+          onlyCar={onlyCar}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        ></CustomModal>
       </div>
     </div>
   );
