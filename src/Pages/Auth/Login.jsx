@@ -1,7 +1,7 @@
 import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
-  const { userLogin } = useAuth();
+  const { userLogin, googleSign } = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -18,8 +18,11 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    console.log("Google Login Clicked");
-    // Add your Google login logic here
+    googleSign((result) => {
+      console.log("gogole  login", result);
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
