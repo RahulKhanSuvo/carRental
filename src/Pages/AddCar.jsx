@@ -1,41 +1,35 @@
-import { useDropzone } from "react-dropzone";
-
+import axios from "axios";
+import { useContext } from "react";
+import AuthContext from "../Context/AuthContext";
 const AddCar = () => {
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-    multiple: true,
-  });
+  const { name } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Create FormData
     const formData = new FormData(e.target);
 
-    // Append files to FormData
-    acceptedFiles.forEach((file) => {
-      formData.append("images", file);
-    });
+    const features = formData.getAll("features");
+    formData.delete("features");
 
-    // Convert FormData to an object (excluding files)
     const initialData = Object.fromEntries(formData.entries());
-    console.log("Form Data (Object):", initialData);
+    initialData.features = features;
+    const createdAt = new Date().toISOString();
+    const finalData = {
+      ...initialData,
+      bookingCount: 0,
+      bookingStatus: "Pending",
+      createdAt,
+    };
 
+    console.log(finalData);
     try {
-      // Send form data to the backend
-      const response = await fetch("http://localhost:5000/api/cars", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save car details");
-      }
-
-      const result = await response.json();
-      console.log("Car added successfully:", result);
+      const { data } = await axios.post(
+        "http://localhost:5000/add-car",
+        finalData
+      );
+      console.log(data);
     } catch (error) {
-      console.error("Error:", error);
+      console.log(error);
     }
   };
 
@@ -55,7 +49,6 @@ const AddCar = () => {
             className="w-full mt-1 p-2 border border-gray-300 rounded-md"
           />
         </div>
-
         {/* Daily Rental Price */}
         <div>
           <label
@@ -66,12 +59,12 @@ const AddCar = () => {
           </label>
           <input
             type="number"
+            id="dailyRentalPrice"
             name="dailyRentalPrice"
             placeholder="Enter daily rental price"
             className="w-full mt-1 p-2 border border-gray-300 rounded-md"
           />
         </div>
-
         {/* Availability */}
         <div>
           <label
@@ -88,8 +81,7 @@ const AddCar = () => {
             <option value="Unavailable">Unavailable</option>
           </select>
         </div>
-
-        {/* Vehicle Registration Number */}
+        {/* Registration Number */}
         <div>
           <label
             htmlFor="vehicleRegNumber"
@@ -99,12 +91,12 @@ const AddCar = () => {
           </label>
           <input
             type="text"
+            id="vehicleRegNumber"
             name="vehicleRegNumber"
             placeholder="Enter registration number"
             className="w-full mt-1 p-2 border border-gray-300 rounded-md"
           />
         </div>
-
         {/* Features */}
         <div>
           <label htmlFor="features" className="block font-medium text-gray-700">
@@ -126,7 +118,6 @@ const AddCar = () => {
             )}
           </div>
         </div>
-
         {/* Description */}
         <div>
           <label
@@ -136,39 +127,26 @@ const AddCar = () => {
             Description
           </label>
           <textarea
+            id="description"
             name="description"
             placeholder="Enter car description"
             rows="4"
             className="w-full mt-1 p-2 border border-gray-300 rounded-md"
           />
         </div>
-
-        {/* Image Upload (React Dropzone) */}
-        <div className="mt-4">
-          <label htmlFor="images" className="block font-medium text-gray-700">
-            Upload Images
+        {/* Image URL */}
+        <div>
+          <label htmlFor="imageUrl" className="block font-medium text-gray-700">
+            Image URL
           </label>
-          <div
-            {...getRootProps()}
-            className="w-full mt-1 p-4 border border-dashed border-gray-300 text-center rounded-md"
-          >
-            <input {...getInputProps()} name="images" />
-            <p className="text-gray-500">
-              Drag & drop or click to upload images
-            </p>
-          </div>
-          {acceptedFiles.length > 0 && (
-            <div className="mt-2">
-              <h4 className="font-medium text-gray-700">Uploaded Images:</h4>
-              <ul className="list-disc pl-5 text-gray-600">
-                {acceptedFiles.map((file, index) => (
-                  <li key={index}>{file.name}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <input
+            type="url"
+            id="imageUrl"
+            name="imageUrl"
+            placeholder="Enter image URL"
+            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          />
         </div>
-
         {/* Location */}
         <div>
           <label htmlFor="location" className="block font-medium text-gray-700">
@@ -181,7 +159,6 @@ const AddCar = () => {
             className="w-full mt-1 p-2 border border-gray-300 rounded-md"
           />
         </div>
-
         <button
           type="submit"
           className="w-full py-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
