@@ -1,7 +1,7 @@
 import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
-  const { userRegistration } = useAuth();
+  const { userRegistration, updateUser } = useAuth();
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -17,6 +17,11 @@ const Register = () => {
     userRegistration(email, password)
       .then((result) => {
         console.log(result.user);
+        updateUser({ displayName: name, photoURL: photoUrl })
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => {
         console.log(error);

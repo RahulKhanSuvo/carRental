@@ -5,10 +5,10 @@ const PrivateRouter = ({ children }) => {
   const location = useLocation();
   const { user, loading } = useAuth();
   if (loading) {
-    <h3>Loading</h3>;
+    return <h3>Loading</h3>;
   }
   if (user) {
-    children;
+    return children;
   }
   return <Navigate state={location.pathname} to={"/login"}></Navigate>;
 };

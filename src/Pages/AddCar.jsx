@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useContext } from "react";
-import AuthContext from "../Context/AuthContext";
-const AddCar = () => {
-  const { name } = useContext(AuthContext);
+import useAuth from "../Hooks/useAuth";
 
+const AddCar = () => {
+  const { user } = useAuth();
+  console.log(user.email);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -16,9 +16,15 @@ const AddCar = () => {
     const createdAt = new Date().toISOString();
     const finalData = {
       ...initialData,
+
       bookingCount: 0,
       bookingStatus: "Pending",
       createdAt,
+      user: {
+        email: user.email,
+        name: user.displayName,
+        photo: user.photoURL,
+      },
     };
 
     console.log(finalData);

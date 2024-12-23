@@ -1,13 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/Logo/logo_v4.png";
+import useAuth from "../Hooks/useAuth";
 const NavBar = () => {
+  const { user, useSignOut } = useAuth();
+  console.log(user);
   const links = (
     <>
       <NavLink to={"/"}>Home</NavLink>
       <NavLink> Available Cars</NavLink>
-      <NavLink to={"/addCar"}> Add Car</NavLink>
-      <NavLink> My Cars</NavLink>
-      <NavLink> My Bookings</NavLink>
+      {user && (
+        <>
+          <NavLink to={"/addCar"}> Add Car</NavLink>
+          <NavLink to={"/myCar"}> My Cars</NavLink>
+          <NavLink> My Bookings</NavLink>
+        </>
+      )}
     </>
   );
   return (
@@ -16,12 +23,20 @@ const NavBar = () => {
         <img className="w-36" src={logo} alt="" />
         <div className="flex gap-5">{links}</div>
         <div>
-          <Link to={"/login"}>
-            <button>Sign In </button>
-          </Link>
-          <Link to={"/register"}>
-            <button>Register</button>
-          </Link>
+          {user ? (
+            <>
+              <button onClick={useSignOut}>Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to={"/login"}>
+                <button>Sign In </button>
+              </Link>
+              <Link to={"/register"}>
+                <button>Register</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

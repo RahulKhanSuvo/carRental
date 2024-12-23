@@ -5,6 +5,7 @@ import AddCar from "../Pages/AddCar";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import PrivateRouter from "./PrivateRouter";
+import MyCar from "../Pages/MyCar";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             <AddCar></AddCar>,
           </PrivateRouter>
         ),
+      },
+      {
+        path: "/myCar",
+        element: <MyCar></MyCar>,
       },
       {
         path: "/login",

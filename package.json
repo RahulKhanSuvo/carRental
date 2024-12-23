@@ -17,7 +17,7 @@
     "react-dropzone": "^14.3.5",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.0",
-    "react-sweetalert2": "^0.5.2",
+    "react-sweetalert2": "^0.6.0",
     "swiper": "^11.1.15"
   },
   "devDependencies": {
@@ -26,6 +26,7 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.22",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
