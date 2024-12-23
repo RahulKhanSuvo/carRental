@@ -7,7 +7,7 @@ const NavBar = () => {
   const links = (
     <>
       <NavLink to={"/"}>Home</NavLink>
-      <NavLink> Available Cars</NavLink>
+      <NavLink to={"/availableCar"}> Available Cars</NavLink>
       {user && (
         <>
           <NavLink to={"/addCar"}> Add Car</NavLink>
