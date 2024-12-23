@@ -1,10 +1,20 @@
+import useAuth from "../../Hooks/useAuth";
+
 const Login = () => {
+  const { userLogin } = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
-    // Collect form data
+
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
+    userLogin(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleGoogleLogin = () => {
