@@ -81,6 +81,7 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     }
 
     const createdAt = new Date().toISOString();
+    initialData.dailyRentalPrice = Number(initialData.dailyRentalPrice);
     const finalData = {
       ...initialData,
       bookingCount: 0,

@@ -13,6 +13,7 @@ const AddCar = () => {
 
     const initialData = Object.fromEntries(formData.entries());
     initialData.features = features;
+    initialData.dailyRentalPrice = Number(initialData.dailyRentalPrice);
     const createdAt = new Date().toISOString();
     const finalData = {
       ...initialData,
@@ -28,15 +29,15 @@ const AddCar = () => {
     };
 
     console.log(finalData);
-    try {
-      const { data } = await axios.post(
-        "http://localhost:5000/add-car",
-        finalData
-      );
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const { data } = await axios.post(
+    //     "http://localhost:5000/add-car",
+    //     finalData
+    //   );
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (

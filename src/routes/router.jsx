@@ -7,6 +7,8 @@ import Register from "../Pages/Auth/Register";
 import PrivateRouter from "./PrivateRouter";
 import MyCar from "../Pages/MyCar";
 import AvailableCars from "../Pages/AvailableCars";
+import CarDetails from "../Pages/CarDetails";
+import MyBooking from "../Pages/MyBooking";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/availableCar",
         element: <AvailableCars></AvailableCars>,
+      },
+      {
+        path: "/carDetails/:id",
+        element: <CarDetails></CarDetails>,
+      },
+      {
+        path: "/myBookings",
+        element: (
+          <PrivateRouter>
+            <MyBooking></MyBooking>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/login",

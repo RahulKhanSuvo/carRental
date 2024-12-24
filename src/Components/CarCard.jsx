@@ -1,7 +1,8 @@
 import { FaLocationDot } from "react-icons/fa6";
-
-const CarCard = ({ car }) => {
+import { Link } from "react-router-dom";
+const CarCard = ({ car, isTog }) => {
   const {
+    _id,
     imageUrl,
     model,
     location,
@@ -11,7 +12,11 @@ const CarCard = ({ car }) => {
   } = car;
 
   return (
-    <div className="shadow-lg rounded-lg overflow-hidden bg-white">
+    <div
+      className={`${
+        isTog ? "" : "flex"
+      } shadow-lg rounded-lg overflow-hidden group bg-white`}
+    >
       <div className=" overflow-hidden relative">
         <img
           className="md:h-64 lg:h-96 w-full object-cover"
@@ -20,10 +25,10 @@ const CarCard = ({ car }) => {
         />
         <p
           className={`${
-            availability === "Unavailable" ? "bg-[#292929]" : "bg-[#F0151F]"
+            availability === "Unavailable" ? "bg-[#292929]" : "bg"
           } text-white px-4 py-3 text-xl rounded-md font-bold text-center absolute top-4 left-1 transform `}
         >
-          {availability}
+          {availability === "Unavailable" && availability}
         </p>
       </div>
       <div className="px-6 pb-6">
@@ -48,9 +53,11 @@ const CarCard = ({ car }) => {
             / Day
           </h3>
         </div>
-        <button className="w-full py-3 mt-6 bg-[#ECF0F4] text-xl font-medium text-[#333] rounded-lg hover:bg-[#F0151F] transition-all hover:text-white duration-300">
-          Book Now
-        </button>
+        <Link to={`/carDetails/${_id}`}>
+          <button className="w-full py-3 mt-6 bg-[#ECF0F4] text-xl font-medium text-[#333] rounded-lg group-hover:bg-[#F0151F] transition-all hover:text-white duration-300">
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
