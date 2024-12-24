@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
-const ModifyDate = ({ isOpen, onClose, onlyBooking }) => {
+const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
   if (!isOpen) return null;
   const [pickup, setPickup] = useState(() =>
     onlyBooking.pickupDate ? new Date(onlyBooking.pickupDate) : new Date()
@@ -48,7 +48,7 @@ const ModifyDate = ({ isOpen, onClose, onlyBooking }) => {
         icon: "success",
         background: "#f9f9f9",
       });
-
+      setDone("by modal");
       onClose();
     } catch (error) {
       console.log(error);

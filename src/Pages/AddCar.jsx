@@ -3,7 +3,6 @@ import useAuth from "../Hooks/useAuth";
 
 const AddCar = () => {
   const { user } = useAuth();
-  console.log(user.email);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -28,16 +27,15 @@ const AddCar = () => {
       },
     };
 
-    console.log(finalData);
-    // try {
-    //   const { data } = await axios.post(
-    //     "http://localhost:5000/add-car",
-    //     finalData
-    //   );
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/add-car",
+        finalData
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

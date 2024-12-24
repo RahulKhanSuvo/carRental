@@ -1,5 +1,5 @@
 import bannerImage from "../assets/Logo/bannerImage.jpg";
-
+import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div
@@ -24,9 +24,11 @@ const Banner = () => {
               just need a reliable ride for the day, we offer a wide range of
               vehicles to suit your needs.
             </p>
-            <button className="bg-[#FF3600] text-white py-3 px-6 text-lg md:text-xl font-semibold rounded-full ">
-              View Available
-            </button>
+            <Link to={"/availableCar"}>
+              <button className="bg-[#FF3600] text-white py-3 px-6 text-lg md:text-xl font-semibold rounded-full ">
+                View Available
+              </button>
+            </Link>
           </div>
         </div>
       </div>

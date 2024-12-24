@@ -9,7 +9,7 @@ import ModifyDate from "../Modal/ModifyDate";
 const MyBooking = () => {
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
-  const [isDone, setDone] = useState(true);
+  const [isDone, setDone] = useState("");
   const [onlyBooking, setOnlyBooking] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,15 +18,15 @@ const MyBooking = () => {
       .get(`http://localhost:5000/my-bookings/${user.email}`)
       .then((res) => setBookings(res.data))
       .catch((err) => console.error("Error fetching bookings:", err));
-  }, [user.email, isDone]);
+  }, [user.email, isDone, isModalOpen]);
 
   const handleModifyBooking = async (bookingId) => {
-    setIsModalOpen(true);
     try {
       const { data } = await axios.get(
         `http://localhost:5000/single-booking/${bookingId}`
       );
       setOnlyBooking(data);
+      setIsModalOpen(true);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -55,7 +55,7 @@ const MyBooking = () => {
               "Your booking has been canceled.",
               "success"
             );
-            setDone(false);
+            setDone("by cancel");
           })
           .catch((error) => {
             console.error("Error canceling booking:", error);
@@ -166,6 +166,7 @@ const MyBooking = () => {
             </tbody>
           </table>
           <ModifyDate
+            setDone={setDone}
             onlyBooking={onlyBooking}
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
