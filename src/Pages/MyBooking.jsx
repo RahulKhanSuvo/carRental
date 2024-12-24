@@ -10,7 +10,8 @@ const MyBooking = () => {
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
   const [isDone, setDone] = useState(true);
-  const [onlyBoolking, setOnlyBooking] = useState([]);
+  const [onlyBooking, setOnlyBooking] = useState([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     axios
@@ -26,6 +27,7 @@ const MyBooking = () => {
         `http://localhost:5000/single-booking/${bookingId}`
       );
       setOnlyBooking(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -164,6 +166,7 @@ const MyBooking = () => {
             </tbody>
           </table>
           <ModifyDate
+            onlyBooking={onlyBooking}
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
           ></ModifyDate>
