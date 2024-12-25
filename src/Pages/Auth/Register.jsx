@@ -1,7 +1,10 @@
 import useAuth from "../../Hooks/useAuth";
-
+import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const { userRegistration, updateUser } = useAuth();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -11,20 +14,75 @@ const Register = () => {
     const password = formData.get("password");
     const photoUrl = formData.get("photoUrl");
     if (!name || !email || !password) {
-      alert("All fields are required!");
+      Swal.fire({
+        title: "warning!",
+        text: "All fields are required!",
+        icon: "warning",
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      return;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      Swal.fire({
+        title: "Invalid Email",
+        text: "Please enter a valid email address.",
+        icon: "error",
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      return;
+    }
+    if (password.length < 6) {
+      Swal.fire({
+        title: "Password too short",
+        text: "Password must be at least 6 characters long.",
+        icon: "error",
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      return;
+    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordRegex.test(password)) {
+      Swal.fire({
+        title: "Password Invalid",
+        text: "Password must be at least 6 characters long and include both uppercase and lowercase letters.",
+        icon: "error",
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true,
+      });
       return;
     }
     userRegistration(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         updateUser({ displayName: name, photoURL: photoUrl })
-          .then((result) => {
-            console.log(result);
+          .then(() => {
+            Swal.fire({
+              title: "success",
+              text: "Registration successfully",
+              icon: "success",
+              toast: true,
+              timer: 3000,
+              timerProgressBar: true,
+            });
+            navigate("/login");
           })
-          .catch((error) => console.log(error));
+          .catch(() => {});
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        Swal.fire({
+          text: "please provide a valid info",
+          icon: "error",
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       });
   };
 
@@ -47,6 +105,7 @@ const Register = () => {
               type="text"
               name="name"
               id="name"
+              required
               placeholder="Enter your name"
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -64,6 +123,7 @@ const Register = () => {
               type="email"
               name="email"
               id="email"
+              required
               placeholder="Enter your email"
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -81,6 +141,7 @@ const Register = () => {
               type="password"
               name="password"
               id="password"
+              required
               placeholder="Enter your password"
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -97,6 +158,7 @@ const Register = () => {
             <input
               type="url"
               name="photoUrl"
+              required
               id="photoUrl"
               placeholder="Enter your photo URL"
               className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -111,7 +173,7 @@ const Register = () => {
             Register
           </button>
         </form>
-
+        <SocialLogin></SocialLogin>
         {/* Login Redirect */}
         <p className="text-center text-gray-600 text-sm mt-6">
           Already have an account?{" "}

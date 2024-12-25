@@ -1,28 +1,36 @@
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-
+import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
 const Login = () => {
   const { userLogin, googleSign } = useAuth();
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
     userLogin(email, password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        Swal.fire({
+          title: "Success!",
+          text: "login Successfully.",
+          icon: "success",
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+        navigate("/");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        Swal.fire({
+          text: "please provide a valid info",
+          icon: "error",
+          toast: true,
+          timer: 3000,
+          timerProgressBar: true,
+        });
       });
-  };
-
-  const handleGoogleLogin = () => {
-    googleSign((result) => {
-      console.log("gogole  login", result);
-    }).catch((error) => {
-      console.log(error);
-    });
   };
 
   return (
@@ -73,14 +81,7 @@ const Login = () => {
       <p className="text-center mt-4 text-gray-600">Or Login With</p>
 
       {/* Google Login Button */}
-      <div className="flex justify-center mt-2">
-        <button
-          onClick={handleGoogleLogin}
-          className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100"
-        >
-          <span>Google</span>
-        </button>
-      </div>
+      <SocialLogin></SocialLogin>
     </div>
   );
 };
