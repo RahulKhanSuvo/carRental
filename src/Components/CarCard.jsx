@@ -32,7 +32,7 @@ const CarCard = ({ car, isTog }) => {
     <div
       className={`${
         isTog ? "" : "flex"
-      } shadow-lg rounded-lg overflow-hidden group bg-white transition-transform transform duration-[400ms] hover:scale-105 hover:shadow-2xl`}
+      } shadow-lg rounded-lg overflow-hidden group bg-white transition-transform transform duration-500 hover:scale-105 hover:shadow-2xl`}
     >
       {/* Car Image Section */}
       <div className="overflow-hidden relative">

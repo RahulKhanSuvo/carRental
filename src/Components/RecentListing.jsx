@@ -14,15 +14,21 @@ const RecentListing = () => {
   }, []);
 
   return (
-    <div className="relative">
-      {/* Background Image */}
+    <div>
+      {/* Background Section */}
       <div className="relative">
-        <img className="w-full" src={bg} alt="Background" />
-        <div className="absolute inset-0 bg-[#ECEFF4] bg-opacity-50"></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${bg})`,
+            height: "60vh", // 30% height
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-blue-500 bg-opacity-50"></div>
       </div>
 
-      {/* Cars Listing */}
-      <div className="lg:container absolute top-10 left-0 right-0 lg:mx-auto md:mx-6 mx-4">
+      {/* Cars Listing Section */}
+      <div className="lg:container mx-auto  py-16 -mt-20 relative z-10">
         <div className="text-center mb-12">
           <p className="text-center text-[#ff3726] text-sm">
             CHECKOUT NEW CARS
@@ -31,7 +37,7 @@ const RecentListing = () => {
             Cars We’re Offering for Rentals
           </h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cars.map((car) => (
             <CarCard key={car._id} isTog={isTog} car={car}></CarCard>
           ))}
