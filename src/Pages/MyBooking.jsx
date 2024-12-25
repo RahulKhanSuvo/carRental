@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { IoTrashOutline } from "react-icons/io5";
 import { FaCalendarAlt } from "react-icons/fa";
 import ModifyDate from "../Modal/ModifyDate";
-import { Bar } from "react-chartjs-2"; // Import the Bar chart from react-chartjs-2
+import { Bar } from "react-chartjs-2"; //
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +15,7 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js"; // Import required components from Chart.js
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +24,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend
-); // Register Chart.js components
+);
 
 const MyBooking = () => {
   const { user } = useAuth();
@@ -34,8 +34,8 @@ const MyBooking = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/my-bookings/${user.email}`)
+    axiosSecure
+      .get(`/my-bookings/${user.email}`)
       .then((res) => setBookings(res.data))
       .catch((err) => console.error("Error fetching bookings:", err));
   }, [user.email, isDone, isModalOpen]);

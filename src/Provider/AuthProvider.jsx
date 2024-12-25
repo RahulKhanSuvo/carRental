@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import AuthContext from "../Context/AuthContext";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -36,20 +37,34 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const useSignOut = () => {
+  const logOut = () => {
     return signOut(auth);
   };
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         console.log("current user", currentUser);
         setUser(currentUser);
         setLoading(false);
+
+        await axios.post(
+          "http://localhost:5000/jwt",
+          {
+            email: currentUser.email,
+          },
+          { withCredentials: true }
+        );
       } else {
+        await axios.get("http://localhost:5000/logout", {
+          withCredentials: true,
+        });
         setLoading(false);
         setUser(null);
       }
     });
+    return () => {
+      return unsubscribe();
+    };
   }, []);
   const userInfo = {
     userRegistration,
@@ -57,7 +72,7 @@ const AuthProvider = ({ children }) => {
     loading,
     userLogin,
     googleSign,
-    useSignOut,
+    logOut,
     updateUser,
   };
 
