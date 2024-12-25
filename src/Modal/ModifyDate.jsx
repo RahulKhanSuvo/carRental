@@ -37,7 +37,7 @@ const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
     }
 
     try {
-      const res = await axios.patch(
+      await axios.patch(
         `http://localhost:5000/date-update/${onlyBooking._id}`,
         updateData
       );
@@ -92,9 +92,15 @@ const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
             onChange={(date) => setDropoff(date)}
             showTimeSelect
             dateFormat="dd-MM-yyyy HH:mm"
-            minDate={pickup} // Ensure drop-off date is after the pickup date
+            minDate={pickup}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
+        </div>
+        <div>
+          <h3>
+            {" "}
+            Total Price: <span className="font-bold"> ${totalPrice}</span>{" "}
+          </h3>
         </div>
         <div className="flex justify-end space-x-2">
           <button

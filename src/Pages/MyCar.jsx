@@ -98,7 +98,7 @@ const MyCar = () => {
       <div className="overflow-x-auto">
         <table className=" w-full table border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-[#FF2C3B] text-white text-center">
+            <tr className="bg-[#FF2C3B] text-white text-xl text-center">
               <th className=" ">Car Image</th>
               <th className="">Car Model</th>
               <th className="">Daily Rental Price</th>
@@ -116,15 +116,35 @@ const MyCar = () => {
                     <img
                       src={car.imageUrl}
                       alt={car.model}
-                      className="w-full  object-center  md:h-28  rounded"
+                      className="w-full h-16 object-cover rounded-md"
                     />
                   </td>
                   <td className="">{car.model}</td>
-                  <td className="">${car.dailyRentalPrice}</td>
-                  <td className=" ">{car.bookingCount}</td>
-                  <td className="">{car.availability}</td>
-                  <td className="">
-                    {new Date(car.createdAt).toLocaleDateString()}
+                  <td className="px-4 py-3 text-center">
+                    <span className="px-3 py-1 bg-[#FF2C3B] text-white font-semibold rounded-lg shadow-sm">
+                      ${car.dailyRentalPrice.toFixed(2)}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-600 font-semibold rounded-md">
+                      {car.bookingCount}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span
+                      className={`px-2 py-1 font-semibold rounded-md ${
+                        car.availability === "Available"
+                          ? "bg-green-100 text-green-600"
+                          : "bg-red-100 text-red-600"
+                      }`}
+                    >
+                      {car.availability}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 font-medium rounded-md border border-gray-300">
+                      {new Date(car.createdAt).toLocaleDateString()}
+                    </span>
                   </td>
                   <td className="">
                     <button

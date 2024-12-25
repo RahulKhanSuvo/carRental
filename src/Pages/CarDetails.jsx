@@ -19,7 +19,7 @@ const CarDetails = () => {
   const [days, setDays] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const { id } = useParams();
-  console.log(car);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/car-details/${id}`)
@@ -55,6 +55,7 @@ const CarDetails = () => {
     gear,
     doors,
     passengers,
+    bookingCount,
   } = car;
 
   const handleBookNow = async () => {
@@ -100,7 +101,7 @@ const CarDetails = () => {
             pickupDate,
             dropoffDate,
             rentUser: rentUser.email,
-            bookingStatus,
+            bookingStatus: "confirmed",
             totalPrice,
             bookingUser: {
               name: user.displayName,
@@ -109,10 +110,7 @@ const CarDetails = () => {
             },
           };
 
-          const { data } = await axios.post(
-            "http://localhost:5000/bookings",
-            bookingPayload
-          );
+          await axios.post("http://localhost:5000/bookings", bookingPayload);
           Swal.fire({
             title: "Booking Confirmed!",
             text: `Your booking for ${model} has been confirmed.`,
@@ -136,18 +134,20 @@ const CarDetails = () => {
       <div className="grid gap-6 grid-cols-1 md:grid-cols-4">
         {/* Left Section: Car Details */}
         <div className="col-span-3">
-          <div className="mb-6">
-            <img
-              className="w-full h-80 object-cover rounded-lg shadow-lg"
-              src={imageUrl}
-              alt={model}
-            />
+          <div className="">
+            <img className="w-full h-[500px] " src={imageUrl} alt={model} />
           </div>
           <div className="bg-white rounded-lg p-6 shadow-lg">
-            <p className="text-xl font-bold text-[#FF2C61] flex items-center mb-4">
-              <CiLocationOn className="mr-2" />
-              {location}
-            </p>
+            <div className="flex justify-between items-center">
+              <p className="text-xl font-bold text-[#FF2C61] flex items-center mb-4">
+                <CiLocationOn className="mr-2" />
+                {location}
+              </p>
+              <p className="flex gap-2 items-center">
+                <span>{bookingCount}</span>{" "}
+                {bookingCount === 0 ? "No bookings yet" : "Bookings"}
+              </p>
+            </div>
             <div className="flex justify-between">
               <h1 className="text-3xl font-semibold pb-4 border-b mb-4">
                 {model}
@@ -209,7 +209,7 @@ const CarDetails = () => {
         </div>
 
         {/* Right Section: Booking Form */}
-        <div>
+        <div className="col-span-1">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h3 className="text-xl border-b font-semibold pb-6">
               <span className="text-4xl mr-2 font-bold text-[#FF2C61]">
