@@ -1,11 +1,14 @@
 import axios from "axios";
 import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const AddCar = () => {
   const { user } = useAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = e.target;
+    const formData = new FormData(form);
 
     const features = formData.getAll("features");
     formData.delete("features");
@@ -14,9 +17,9 @@ const AddCar = () => {
     initialData.features = features;
     initialData.dailyRentalPrice = Number(initialData.dailyRentalPrice);
     const createdAt = new Date().toISOString();
+
     const finalData = {
       ...initialData,
-
       bookingCount: 0,
       bookingStatus: "Pending",
       createdAt,
@@ -26,22 +29,35 @@ const AddCar = () => {
         photo: user.photoURL,
       },
     };
-
+    console.log(finalData);
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/add-car",
-        finalData
-      );
-      console.log(data);
+      await axios.post("http://localhost:5000/add-car", finalData);
+
+      Swal.fire({
+        title: "Car Added Successfully!",
+        text: "Your car has been added to the database.",
+        icon: "success",
+        confirmButtonText: "OK",
+        timer: 3000,
+      });
+      form.reset();
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
   };
 
   return (
     <div className="lg:container mx-4 lg:mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Add a New Car</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className="text-2xl font-bold mb-6 text-center">Add a New Car</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         {/* Car Model */}
         <div>
           <label className="font-medium text-gray-700 block" htmlFor="carModel">
@@ -51,9 +67,10 @@ const AddCar = () => {
             type="text"
             name="model"
             placeholder="Enter car model"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
         {/* Daily Rental Price */}
         <div>
           <label
@@ -67,9 +84,10 @@ const AddCar = () => {
             id="dailyRentalPrice"
             name="dailyRentalPrice"
             placeholder="Enter daily rental price"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
         {/* Availability */}
         <div>
           <label
@@ -79,13 +97,14 @@ const AddCar = () => {
             Availability
           </label>
           <select
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             name="availability"
           >
             <option value="Available">Available</option>
             <option value="Unavailable">Unavailable</option>
           </select>
         </div>
+
         {/* Registration Number */}
         <div>
           <label
@@ -99,30 +118,40 @@ const AddCar = () => {
             id="vehicleRegNumber"
             name="vehicleRegNumber"
             placeholder="Enter registration number"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
         {/* Features */}
         <div>
           <label htmlFor="features" className="block font-medium text-gray-700">
             Features
           </label>
           <div className="space-x-2">
-            {["GPS", "AC", "Bluetooth", "Sunroof", "Backup Camera"].map(
-              (feature) => (
-                <label key={feature} className="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    name="features"
-                    value={feature}
-                    className="form-checkbox h-5 w-5 text-blue-500"
-                  />
-                  <span className="ml-2 text-gray-700">{feature}</span>
-                </label>
-              )
-            )}
+            {[
+              "GPS",
+              "AC",
+              "Bluetooth",
+              "Sunroof",
+              "Backup Camera",
+              "Cruise Control",
+              "Keyless Entry",
+              "Parking Sensors",
+              "Alloy Wheels",
+            ].map((feature) => (
+              <label key={feature} className="inline-flex items-center">
+                <input
+                  type="checkbox"
+                  name="features"
+                  value={feature}
+                  className="form-checkbox h-5 w-5 text-blue-500"
+                />
+                <span className="ml-2 text-gray-700">{feature}</span>
+              </label>
+            ))}
           </div>
         </div>
+
         {/* Description */}
         <div>
           <label
@@ -136,9 +165,10 @@ const AddCar = () => {
             name="description"
             placeholder="Enter car description"
             rows="4"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
         {/* Image URL */}
         <div>
           <label htmlFor="imageUrl" className="block font-medium text-gray-700">
@@ -149,9 +179,10 @@ const AddCar = () => {
             id="imageUrl"
             name="imageUrl"
             placeholder="Enter image URL"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
         {/* Location */}
         <div>
           <label htmlFor="location" className="block font-medium text-gray-700">
@@ -161,15 +192,98 @@ const AddCar = () => {
             type="text"
             name="location"
             placeholder="Enter location"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full py-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Save Car Details
-        </button>
+
+        {/* Specifications Section */}
+        <div className="col-span-2">
+          <h3 className="text-xl font-medium text-gray-700 mb-4">
+            Car Specifications
+          </h3>
+
+          {/* Doors and Fuel */}
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <label
+                htmlFor="doors"
+                className="block font-medium text-gray-700"
+              >
+                Doors
+              </label>
+              <select
+                className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="doors"
+              >
+                {[2, 3, 4, 5].map((door) => (
+                  <option key={door} value={door}>
+                    {door} Door{door > 1 ? "s" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="fuel" className="block font-medium text-gray-700">
+                Fuel
+              </label>
+              <select
+                className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="fuel"
+              >
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Passengers and Gear */}
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <label
+                htmlFor="passengers"
+                className="block font-medium text-gray-700"
+              >
+                Passengers
+              </label>
+              <select
+                className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="passengers"
+              >
+                {[2, 3, 4, 5, 6, 7].map((passenger) => (
+                  <option key={passenger} value={passenger}>
+                    {passenger} Passenger{passenger > 1 ? "s" : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="gear" className="block font-medium text-gray-700">
+                Gear Type
+              </label>
+              <select
+                className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="gear"
+              >
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <div className="col-span-2 mt-6">
+          <button
+            type="submit"
+            className="w-full py-3 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Save Car Details
+          </button>
+        </div>
       </form>
     </div>
   );

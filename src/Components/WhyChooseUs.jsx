@@ -4,8 +4,9 @@ import {
   FaRegCalendarAlt,
   FaHeadset,
 } from "react-icons/fa";
-import { motion } from "framer-motion"; // Corrected the import from 'motion/react'
-import carBg from "../assets/display_car_image-1024x449.png";
+import { motion } from "framer-motion";
+import shape1 from "../assets/shape-3.png";
+import shape2 from "../assets/shape-4.png";
 
 const WhyChooseUs = () => {
   const points = [
@@ -32,26 +33,27 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <div className="py-16 mb-10 bg-gray-100">
-      <div className="lg:container mx-auto px-4 text-center">
-        <h2 className="text-xl font-bold mb-8 text-gray-800">Why Choose Us?</h2>
+    <div className="relative py-16 mb-10 bg-[#FFF8F6]">
+      {/* Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden flex">
+        <img src={shape1} alt="" className="absolute top-0 left-0 " />
+        <img src={shape2} alt="" className="absolute bottom-0 right-0  " />
+      </div>
+
+      {/* Content */}
+      <div className="lg:container relative z-10 mx-auto pb-24 px-4 text-center">
+        <h2 className="text-base mb-8 text-[#FF4D26]">WHY CHOOSE US?</h2>
         <div className="flex flex-col justify-center items-center">
           <motion.h2
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-bold"
+            className="text-4xl mb-4 font-bold"
           >
-            Best valued deals you will ever find
+            Best Valued Deals You Will Ever Find
           </motion.h2>
-          <p className="max-w-2xl text-gray-600">
-            Discover unbeatable prices on a wide range of vehicles. Whether
-            you’re looking for budget-friendly options or premium cars, we
-            ensure top value for every ride. Book today and experience the
-            difference!
-          </p>
         </div>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid mt-3 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {points.map((point, index) => (
             <motion.div
               key={index}
