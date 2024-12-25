@@ -9,7 +9,6 @@ const MyCar = () => {
   const [cars, setCars] = useState([]);
   const [onlyCar, setOnlyCar] = useState([]);
   const [sort, setSort] = useState("");
-  console.log(sort);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -97,39 +96,37 @@ const MyCar = () => {
         </select>
       </div>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
+        <table className=" w-full table border-collapse border border-gray-300">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-gray-300 p-2">Car Image</th>
-              <th className="border border-gray-300 p-2">Car Model</th>
-              <th className="border border-gray-300 p-2">Daily Rental Price</th>
-              <th className="border border-gray-300 p-2">Availability</th>
-              <th className="border border-gray-300 p-2">Date Added</th>
-              <th className="border border-gray-300 p-2">Actions</th>
+            <tr className="bg-[#FF2C3B] text-white text-center">
+              <th className=" ">Car Image</th>
+              <th className="">Car Model</th>
+              <th className="">Daily Rental Price</th>
+              <th className="">Booking Count</th>
+              <th className="">Availability</th>
+              <th className="">Date Added</th>
+              <th className="">Actions</th>
             </tr>
           </thead>
           <tbody>
             {cars.length > 0 ? (
               cars.map((car) => (
-                <tr key={car._id} className="hover:bg-gray-100">
-                  <td className="border border-gray-300 p-2">
+                <tr key={car._id} className="hover text-center">
+                  <td className="">
                     <img
                       src={car.imageUrl}
                       alt={car.model}
-                      className="w-full object-center object-cover h-28 rounded"
+                      className="w-full  object-center  md:h-28  rounded"
                     />
                   </td>
-                  <td className="border border-gray-300 p-2">{car.model}</td>
-                  <td className="border border-gray-300 p-2">
-                    ${car.dailyRentalPrice}
-                  </td>
-                  <td className="border border-gray-300 p-2">
-                    {car.availability}
-                  </td>
-                  <td className="border border-gray-300 p-2">
+                  <td className="">{car.model}</td>
+                  <td className="">${car.dailyRentalPrice}</td>
+                  <td className=" ">{car.bookingCount}</td>
+                  <td className="">{car.availability}</td>
+                  <td className="">
                     {new Date(car.createdAt).toLocaleDateString()}
                   </td>
-                  <td className="border border-gray-300 p-2">
+                  <td className="">
                     <button
                       className="bg-red-500 text-white px-4 py-2 rounded mr-2"
                       onClick={() => handleDelete(car._id)}
@@ -147,10 +144,12 @@ const MyCar = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="text-center p-4">
+                <td colSpan="6" className="text-center text-2xl p-4">
                   No cars added yet.
                   <Link to={"/addCar"}>
-                    <button>Add car</button>
+                    <button className="btn text-xl bg-[#FF2C3B]">
+                      Add car
+                    </button>
                   </Link>
                 </td>
               </tr>

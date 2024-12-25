@@ -20,7 +20,6 @@ const AddCar = () => {
 
     const finalData = {
       ...initialData,
-      bookingCount: 0,
       bookingStatus: "Pending",
       createdAt,
       user: {
@@ -53,10 +52,12 @@ const AddCar = () => {
 
   return (
     <div className="lg:container mx-4 lg:mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Add a New Car</h2>
+      <h2 className="text-2xl  w-full font-bold mb-6 text-center">
+        Add a New Car
+      </h2>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="grid grid-cols-1 max-w-3xl w-full mx-auto md:grid-cols-3 gap-6"
       >
         {/* Car Model */}
         <div>
@@ -121,54 +122,6 @@ const AddCar = () => {
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-
-        {/* Features */}
-        <div>
-          <label htmlFor="features" className="block font-medium text-gray-700">
-            Features
-          </label>
-          <div className="space-x-2">
-            {[
-              "GPS",
-              "AC",
-              "Bluetooth",
-              "Sunroof",
-              "Backup Camera",
-              "Cruise Control",
-              "Keyless Entry",
-              "Parking Sensors",
-              "Alloy Wheels",
-            ].map((feature) => (
-              <label key={feature} className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="features"
-                  value={feature}
-                  className="form-checkbox h-5 w-5 text-blue-500"
-                />
-                <span className="ml-2 text-gray-700">{feature}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Description */}
-        <div>
-          <label
-            htmlFor="description"
-            className="block font-medium text-gray-700"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Enter car description"
-            rows="4"
-            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
         {/* Image URL */}
         <div>
           <label htmlFor="imageUrl" className="block font-medium text-gray-700">
@@ -196,8 +149,76 @@ const AddCar = () => {
           />
         </div>
 
+        {/* Features */}
+        <div className="col-span-3 grid grid-cols-4 gap-6">
+          <div className="col-span-3">
+            <label
+              htmlFor="features"
+              className="block font-medium text-gray-700"
+            >
+              Features
+            </label>
+            <div className="space-x-2 border rounded-lg p-2 grid grid-cols-3 ">
+              {[
+                "GPS",
+                "AC",
+                "Bluetooth",
+                "Sunroof",
+                "Backup Camera",
+                "Cruise Control",
+                "Keyless Entry",
+                "Parking Sensors",
+                "Alloy Wheels",
+              ].map((feature) => (
+                <label key={feature} className=" ">
+                  <input
+                    type="checkbox"
+                    name="features"
+                    value={feature}
+                    className=" h-5 w-5 text-red-500"
+                  />
+                  <span className="ml-2 text-gray-700">{feature}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="bookingCount"
+              className="block font-medium text-gray-700"
+            >
+              Booking Count
+            </label>
+            <input
+              type="number"
+              name="bookingCount"
+              placeholder="Enter count"
+              defaultValue={0}
+              readOnly
+              className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        {/* Description */}
+        <div className="col-span-3">
+          <label
+            htmlFor="description"
+            className="block font-medium text-gray-700"
+          >
+            Description
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Enter car description"
+            rows="4"
+            className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
         {/* Specifications Section */}
-        <div className="col-span-2">
+        <div className="col-span-3">
           <h3 className="text-xl font-medium text-gray-700 mb-4">
             Car Specifications
           </h3>
@@ -276,7 +297,7 @@ const AddCar = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="col-span-2 mt-6">
+        <div className="col-span-3 mt-6">
           <button
             type="submit"
             className="w-full py-3 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

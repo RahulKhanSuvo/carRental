@@ -5,19 +5,21 @@ import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { CiLocationOn } from "react-icons/ci";
+import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
+import { GiCarDoor, GiGearStick } from "react-icons/gi";
+import { FaGasPump } from "react-icons/fa6";
+import { IoMdCheckmarkCircle } from "react-icons/io";
 
 const CarDetails = () => {
   const { user } = useAuth();
-  console.log(user);
   const [car, setCar] = useState(null);
   const [pickupDate, setPickupDate] = useState(new Date());
-
   const [dropoffDate, setDropoffDate] = useState(new Date());
   const [days, setDays] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
   const { id } = useParams();
-
+  console.log(car);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/car-details/${id}`)
@@ -30,14 +32,13 @@ const CarDetails = () => {
       const days = Math.ceil(
         (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 60 * 60 * 24)
       );
-      console.log(days);
       setDays(days);
       setTotalPrice(days > 0 ? days * car.dailyRentalPrice : 0);
     }
   }, [pickupDate, dropoffDate, car]);
 
   if (!car) {
-    return <p className="text-center mt-10">Loading car details...</p>;
+    return <p className="text-center mt-10 text-xl">Loading car details...</p>;
   }
 
   const {
@@ -50,6 +51,10 @@ const CarDetails = () => {
     description,
     bookingStatus,
     user: rentUser,
+    fuel,
+    gear,
+    doors,
+    passengers,
   } = car;
 
   const handleBookNow = async () => {
@@ -72,7 +77,7 @@ const CarDetails = () => {
           <p><strong>Total Price:</strong> $${totalPrice}</p>
           <p><strong>Pickup Date:</strong> ${pickupDate}</p>
           <p><strong>Drop-off Date:</strong> ${dropoffDate}</p>
-          <p><strong>Booking for</strong> ${days} day</p>
+          <p><strong>Booking for</strong> ${days} day${days > 1 ? "s" : ""}</p>
         </div>
       `,
       icon: "info",
@@ -103,13 +108,11 @@ const CarDetails = () => {
               photoUrl: user.photoURL,
             },
           };
-          console.log(bookingPayload);
 
           const { data } = await axios.post(
             "http://localhost:5000/bookings",
             bookingPayload
           );
-          console.log(data);
           Swal.fire({
             title: "Booking Confirmed!",
             text: `Your booking for ${model} has been confirmed.`,
@@ -117,10 +120,9 @@ const CarDetails = () => {
             background: "#f9f9f9",
           });
         } catch (error) {
-          console.error("Error creating booking:", error);
           Swal.fire({
             title: "Booking Failed!",
-            text: "There was an issue confirming your booking. Please try again.",
+            text: `${error.response.data.message}`,
             icon: "error",
             background: "#f9f9f9",
           });
@@ -130,51 +132,77 @@ const CarDetails = () => {
   };
 
   return (
-    <div className="lg:container lg:mx-auto md:mx-6 p-4">
+    <div className="container mx-auto p-6">
       <div className="grid gap-6 grid-cols-1 md:grid-cols-4">
         {/* Left Section: Car Details */}
         <div className="col-span-3">
           <div className="mb-6">
             <img
-              className="w-full h-80 object-cover rounded-lg shadow-md"
+              className="w-full h-80 object-cover rounded-lg shadow-lg"
               src={imageUrl}
               alt={model}
             />
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold mb-4">{model}</h1>
-            <p className="text-gray-600 mb-2">
+          <div className="bg-white rounded-lg p-6 shadow-lg">
+            <p className="text-xl font-bold text-[#FF2C61] flex items-center mb-4">
+              <CiLocationOn className="mr-2" />
+              {location}
+            </p>
+            <div className="flex justify-between">
+              <h1 className="text-3xl font-semibold pb-4 border-b mb-4">
+                {model}
+              </h1>
+              <p className="text-lg text-gray-700 mb-2">
+                <span
+                  className={`font-semibold ${
+                    availability === "Available"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {availability}
+                </span>
+              </p>
+            </div>
+            <p className="text-lg text-gray-700 mb-2">
               <strong>Price Per Day:</strong> ${dailyRentalPrice}
             </p>
-            <p className="text-gray-600 mb-2">
-              <strong>Location:</strong> {location}
-            </p>
-            <p className="text-gray-600 mb-2">
-              <strong>Availability:</strong>{" "}
-              <span
-                className={`font-semibold ${
-                  availability === "Available"
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {availability}
-              </span>
-            </p>
-            {description && (
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold mb-2">Description</h2>
-                <p className="text-gray-700">{description}</p>
-              </div>
-            )}
+
             {features?.length > 0 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Key Features</h2>
-                <ul className="list-disc pl-6 space-y-1 text-gray-700">
+              <div className="mb-6">
+                <h2 className="text-2xl font-semibold mb-2">Key Features</h2>
+                <ul className="list-none flex flex-wrap gap-4 text-gray-700">
                   {features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
+                    <li className="flex gap-2 items-center" key={index}>
+                      <IoMdCheckmarkCircle className="text-[#4DDF65]" />
+                      {feature}
+                    </li>
                   ))}
                 </ul>
+              </div>
+            )}
+            <div className="border-t pt-4 text-xl text-[#FF2C61] flex flex-wrap justify-between border-b pb-4">
+              <p className="flex gap-2 items-center">
+                <MdOutlineAirlineSeatReclineNormal />
+                <span>{passengers}</span> Seats
+              </p>
+              <p className="flex gap-2 items-center">
+                <GiGearStick />
+                <span>{gear}</span>
+              </p>
+              <p className="flex gap-2 items-center">
+                <GiCarDoor />
+                <span>{doors}</span> Doors
+              </p>
+              <p className="flex gap-2 items-center">
+                <FaGasPump />
+                <span>{fuel}</span>
+              </p>
+            </div>
+            {description && (
+              <div className="mb-6">
+                <h2 className="text-2xl font-semibold mb-2">Description</h2>
+                <p className="text-gray-700">{description}</p>
               </div>
             )}
           </div>
@@ -183,57 +211,55 @@ const CarDetails = () => {
         {/* Right Section: Booking Form */}
         <div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3>
-              <span className="font-bold text-[#FF2C3B]">
+            <h3 className="text-xl border-b font-semibold pb-6">
+              <span className="text-4xl mr-2 font-bold text-[#FF2C61]">
                 ${dailyRentalPrice}
               </span>
               /day
             </h3>
-            <h2 className="text-2xl font-medium">Book this Car</h2>
+            <h2 className="text-2xl font-medium mb-4 mt-3">Book this Car</h2>
 
             <div className="mb-4">
               <label
                 htmlFor="pickupDate"
-                className="block font-medium text-gray-700"
+                className="block text-lg font-medium text-gray-700"
               >
                 Pickup Date
               </label>
-              <div>
-                <DatePicker
-                  selected={pickupDate}
-                  onChange={(date) => setPickupDate(date)}
-                  showTimeSelect
-                  showIcon
-                  dateFormat="dd-MM-yyyy HH:mm"
-                  minDate={new Date()}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-              </div>
+              <DatePicker
+                selected={pickupDate}
+                onChange={(date) => setPickupDate(date)}
+                showTimeSelect
+                dateFormat="dd-MM-yyyy HH:mm"
+                minDate={new Date()}
+                className="w-full p-2 border border-gray-300 bg-[#F4F4F4] rounded-md mt-2"
+              />
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="dropoffDate"
-                className="block font-medium text-gray-700"
+                className="block text-lg font-medium text-gray-700"
               >
                 Drop-off Date
               </label>
-
               <DatePicker
                 selected={dropoffDate}
                 onChange={(date) => setDropoffDate(date)}
                 showTimeSelect
-                showIcon
                 dateFormat="dd-MM-yyyy HH:mm"
                 minDate={new Date()}
-                className="w-full p-4 border border-gray-300 rounded-md"
+                className="w-full p-2 border border-gray-300 bg-[#F4F4F4] rounded-md mt-2"
               />
             </div>
-            <p className="text-gray-600 mb-4">
+
+            <p className="text-lg text-gray-700 mb-4">
               <strong>Total Price:</strong> ${totalPrice}
             </p>
+
             <button
               onClick={handleBookNow}
-              className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="w-full py-3 bg-[#FF2C61] text-white disabled:bg-gray-500 disabled:cursor-not-allowed font-semibold rounded-md hover:bg-[#d42e4b]"
               disabled={availability !== "Available"}
             >
               {availability === "Available" ? "Book Now" : "Unavailable"}

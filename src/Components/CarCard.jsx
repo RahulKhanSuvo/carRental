@@ -1,6 +1,7 @@
-import { FaLocationDot } from "react-icons/fa6";
+import { FaGasPump, FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
+import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
+import { GiCarDoor, GiGearStick } from "react-icons/gi";
 const CarCard = ({ car, isTog }) => {
   const {
     _id,
@@ -11,6 +12,11 @@ const CarCard = ({ car, isTog }) => {
     availability,
     dailyRentalPrice,
     createdAt,
+    fuel,
+    gear,
+    doors,
+    passengers,
+    bookingCount,
   } = car;
 
   const calculateDatePosted = (createdAt) => {
@@ -54,21 +60,32 @@ const CarCard = ({ car, isTog }) => {
       {/* Car Details Section */}
       <div className="px-6 pb-6">
         {/* Car Model */}
-        <h2 className="text-2xl font-semibold text-gray-800">{model}</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-semibold text-gray-800">{model}</h2>
+          <p>Booking{bookingCount}</p>
+        </div>
         {/* Location */}
         <div className="flex items-center text-gray-600 mt-2">
           <FaLocationDot className="mr-2" /> <p>{location}</p>
         </div>
-        {/* Features */}
-        <div className="flex flex-wrap gap-2 mt-4">
-          {features.map((feature) => (
-            <span
-              className="text-white px-3 py-1 rounded-full bg-[#FF3726] text-xs"
-              key={feature}
-            >
-              {feature}
-            </span>
-          ))}
+        {/*  */}
+        <div className="grid grid-cols-2 border-t pt-4 text-xl text-[#FF2C61]">
+          <p className="flex gap-1  items-center">
+            <MdOutlineAirlineSeatReclineNormal />
+            <span> {passengers}</span> Seats
+          </p>
+          <p className="flex gap-1  items-center">
+            <GiGearStick />
+            <span> {gear}</span>
+          </p>
+          <p className="flex gap-1  items-center">
+            <GiCarDoor />
+            <span> {doors}</span> Doors
+          </p>
+          <p className="flex gap-1  items-center">
+            <FaGasPump />
+            <span> {fuel}</span>
+          </p>
         </div>
         {/* Pricing */}
         <div className="mt-4 text-lg font-medium text-gray-700">
