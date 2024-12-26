@@ -122,7 +122,7 @@ const NavBar = () => {
         </div>
       </div>
       <div className={`${isActive ? "hidden" : ""}`}>
-        <div className="bg-white lg:hidden h-52 flex flex-col pl-10">
+        <div className="bg-white border lg:hidden h-52 flex flex-col pl-6">
           {links}
         </div>
       </div>

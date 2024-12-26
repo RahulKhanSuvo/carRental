@@ -45,12 +45,14 @@ const CarCard = ({ car, isTog }) => {
     <div
       className={`${
         isTog ? "" : "flex flex-col md:flex-row md:items-center  "
-      } shadow-lg rounded-lg overflow-hidden group bg-white transition-transform transform duration-500 hover:scale-105 hover:shadow-2xl`}
+      } shadow-lg rounded-lg overflow-hidden group bg-white transition-transform transform duration-500 hover:scale-105 hover:shadow-2xl border`}
     >
       {/* Car Image Section */}
       <div className="overflow-hidden relative">
         <img
-          className="md:h-64 lg:h-96 h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className={`${
+            isTog ? "md:h-80 w-full" : " w-[500px] lg:w-[700px] md:h-80"
+          }   h-full object-cover transition-transform duration-300 group-hover:scale-110`}
           src={imageUrl}
           alt={model}
         />
@@ -73,7 +75,7 @@ const CarCard = ({ car, isTog }) => {
       </div>
 
       {/* Car Details Section */}
-      <div className="px-5 relative pb-6">
+      <div className="px-5 flex-1 relative pb-6">
         <p
           className={`${
             isTog ? "" : "hidden"

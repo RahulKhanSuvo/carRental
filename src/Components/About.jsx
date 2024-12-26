@@ -40,7 +40,7 @@ const About = () => {
         </div>
 
         {/* Counter Section */}
-        <div className="w-full flex items-center flex-col md:flex-row gap-4 justify-center">
+        <div className="w-full flex  items-center flex-col md:flex-row gap-4 justify-center">
           {counters.map((counter, index) => (
             <div className="relative" key={index}>
               <div className="bg-[#FF2C3B]  size-28 lg:size-40 rounded-full flex justify-center text-center items-center shadow-lg">

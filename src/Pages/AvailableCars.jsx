@@ -41,10 +41,24 @@ const AvailableCars = () => {
             placeholder="Search cars"
           />
           <div className="flex space-x-4">
-            <button onClick={() => setTog(false)} className="text-gray-600">
-              <FaThList size={35} />
+            <button
+              onClick={() => setTog(false)}
+              className={`${
+                isTog
+                  ? "text-[#FF2C3B]"
+                  : "bg-[#FF2C3B] p-3 text-white rounded-md"
+              }`}
+            >
+              <FaThList size={30} />
             </button>
-            <button onClick={() => setTog(true)} className="text-gray-600">
+            <button
+              onClick={() => setTog(true)}
+              className={`${
+                isTog
+                  ? "bg-[#FF2C3B] p-3 text-white rounded-md"
+                  : "text-[#FF2C3B]"
+              }`}
+            >
               <IoGrid size={35} />
             </button>
           </div>
@@ -52,16 +66,18 @@ const AvailableCars = () => {
       </div>
 
       {/* Cars Display Section */}
-      <div
-        className={`${
-          isTog
-            ? "grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            : "flex flex-col gap-6"
-        }`}
-      >
-        {cars.map((car) => (
-          <CarCard isTog={isTog} car={car} key={car._id} />
-        ))}
+      <div>
+        <div
+          className={`${
+            isTog
+              ? "grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              : "flex flex-col gap-6"
+          }`}
+        >
+          {cars.map((car) => (
+            <CarCard isTog={isTog} car={car} key={car._id} />
+          ))}
+        </div>
       </div>
     </div>
   );
