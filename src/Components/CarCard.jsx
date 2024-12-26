@@ -44,13 +44,13 @@ const CarCard = ({ car, isTog }) => {
   return (
     <div
       className={`${
-        isTog ? "" : "flex"
+        isTog ? "" : "flex flex-col md:flex-row items-center items-center "
       } shadow-lg rounded-lg overflow-hidden group bg-white transition-transform transform duration-500 hover:scale-105 hover:shadow-2xl`}
     >
       {/* Car Image Section */}
       <div className="overflow-hidden relative">
         <img
-          className="md:h-64 lg:h-96 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className="md:h-64 lg:h-96 h-full object-cover transition-transform duration-300 group-hover:scale-110"
           src={imageUrl}
           alt={model}
         />
@@ -62,11 +62,23 @@ const CarCard = ({ car, isTog }) => {
         >
           {availability}
         </p>
+        <p
+          className={`${
+            isTog ? "hidden" : ""
+          } absolute bg-[#FFE9EB] px-2 border rounded-full  z-30 text-[#FF2C3B] right-1 bottom-1`}
+        >
+          Booking{" "}
+          <span className="text-[#FF2C3B] font-bold">{bookingCount}</span>
+        </p>
       </div>
 
       {/* Car Details Section */}
       <div className="px-5 relative pb-6">
-        <p className="absolute bg-[#FFE9EB] px-2 border rounded-full -top-3 z-30 text-[#FF2C3B] right-1">
+        <p
+          className={`${
+            isTog ? "" : "hidden"
+          } absolute bg-[#FFE9EB] px-2 border rounded-full -top-3 z-30 text-[#FF2C3B] right-1`}
+        >
           Booking{" "}
           <span className="text-[#FF2C3B] font-bold">{bookingCount}</span>
         </p>
@@ -79,7 +91,7 @@ const CarCard = ({ car, isTog }) => {
           <FaLocationDot className="mr-2" /> <p>{location}</p>
         </div>
         {/*  */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-b pt-4 pb-4 text-xl ">
+        <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-b pt-4 pb-4 text-xl ">
           <p className="flex gap-1  items-center">
             <MdOutlineAirlineSeatReclineNormal className="text-[#FF2C61]" />
             <span> {passengers}</span> Seats

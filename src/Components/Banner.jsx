@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import video from "../assets/banner.mp4";
+import thumb from "../assets/thumb.png";
 const Banner = () => {
   return (
     <div className="relative h-[90vh] w-full">
@@ -8,6 +9,7 @@ const Banner = () => {
         autoPlay
         loop
         muted
+        poster={thumb}
       >
         <source src={video} />
       </video>

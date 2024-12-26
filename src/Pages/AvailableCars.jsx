@@ -14,11 +14,10 @@ const AvailableCars = () => {
       .get(`/available-cars?sort=${sort}&search=${search}`)
       .then((res) => setCars(res.data));
   }, [sort, search]);
-
   return (
     <div className="lg:container mx-auto p-6">
       {/* Sorting and Search Section */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
         <div className="flex items-center space-x-4">
           <label className="font-medium text-xl">Sort By:</label>
           <select
@@ -37,7 +36,7 @@ const AvailableCars = () => {
         <div className="flex items-center space-x-4">
           <input
             onChange={(e) => setSearch(e.target.value)}
-            className="border py-2 px-4 rounded-lg w-72 focus:outline-none shadow-sm"
+            className="border py-2 px-4 rounded-lg w-full md:w-72 focus:outline-none shadow-sm"
             type="text"
             placeholder="Search cars"
           />
