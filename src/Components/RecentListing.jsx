@@ -28,7 +28,7 @@ const RecentListing = () => {
       </div>
 
       {/* Cars Listing Section */}
-      <div className="lg:container mx-auto  py-16 -mt-20 relative z-10">
+      <div className="lg:container md:mx-6 mx-4 lg:mx-auto  py-16 -mt-20 relative z-10">
         <div className="text-center mb-12">
           <p className="text-base w-fit mx-auto px-3 rounded-full  bg-[#FFE9EB]  text-[#ff2c3b]">
             RECENT CARS

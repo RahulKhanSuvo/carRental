@@ -26,7 +26,7 @@ const Banner = () => {
             Elevate Every Journey – Drive Your Dreams Today!
           </h1>
           <Link to="/availableCar">
-            <button className="bg-[#FF2C3B] transition duration-300  hover:bg-[#060605]  mt-6 text-white py-5  px-14 text-lg md:text-xl font-semibold rounded-md shadow-lg ">
+            <button className="bg-[#FF2C3B] transition duration-300  hover:bg-[#060605]  mt-6 text-white py-2 md:py-5  md:px-14 px-5 text-lg md:text-xl font-semibold rounded-md shadow-lg ">
               View Available
             </button>
           </Link>

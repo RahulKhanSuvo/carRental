@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import CustomModal from "../Modal/CustomModal";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+
 import useAxiosSecure from "../Hooks/UseAxios";
 const MyCar = () => {
   const axiosSecure = useAxiosSecure();
@@ -11,15 +11,27 @@ const MyCar = () => {
   const [cars, setCars] = useState([]);
   const [onlyCar, setOnlyCar] = useState([]);
   const [sort, setSort] = useState("");
-
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure
       .get(`/myCar/${user.email}?sort=${sort}`)
-      .then((res) => setCars(res.data));
+      .then((res) => setCars(res.data))
+      .finally(() => {
+        setLoading(false);
+      });
   }, [user.email, isModalOpen, sort, axiosSecure]);
-
+  if (loading) {
+    return (
+      <>
+        <div className="flex justify-center items-center h-64">
+          <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
+        </div>
+      </>
+    );
+  }
   // Handle delete action
   const handleDelete = async (id) => {
     Swal.fire({
@@ -67,8 +79,6 @@ const MyCar = () => {
       }
     });
   };
-
-  // Handle edit action
 
   const handelUpdate = async (id) => {
     try {

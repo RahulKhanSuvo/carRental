@@ -68,20 +68,23 @@ const NavBar = () => {
 
   return (
     <nav className="fixed w-full top-0 z-50 bg-white shadow-md">
-      <div className="flex lg:container py-4 px-6 mx-auto justify-between items-center">
+      <div className="flex lg:container py-4 md:px-6 px-4 lg:mx-auto justify-between items-center">
         {/* menu for tab and mb */}
         <button
           className="text-[#FF2C3B] lg:hidden"
           onClick={() => setActive(!isActive)}
         >
           {isActive ? (
-            <ImMenu className="text-3xl" />
+            <ImMenu className="md:text-3xl" />
           ) : (
-            <RiCloseLargeFill className="text-3xl font-black" />
+            <RiCloseLargeFill className="md:text-3xl font-black" />
           )}
         </button>
         {/* Logo */}
-        <img className="md:w-48 w-32" src={logo} alt="Logo" />
+        <Link to={"/"}>
+          {" "}
+          <img className="md:w-48 w-24" src={logo} alt="Logo" />
+        </Link>
 
         {/* Links */}
         <div className="lg:flex gap-5 text-gray-700 hidden ">{links}</div>
@@ -95,12 +98,12 @@ const NavBar = () => {
                 <img
                   src={user?.photoURL}
                   alt="User Avatar"
-                  className="size-16 rounded-full border-2 border-gray-300"
+                  className="md:size-16 size-10 rounded-full border-2 border-gray-300"
                 />
               )}
               <button
                 onClick={logOut}
-                className=" text-[#FF2C3B] text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  py-2 px-8 rounded "
+                className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-2 md:px-8 px-2 rounded "
               >
                 Logout
               </button>

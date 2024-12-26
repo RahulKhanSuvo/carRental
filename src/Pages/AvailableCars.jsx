@@ -9,11 +9,19 @@ const AvailableCars = () => {
   const [isTog, setTog] = useState(true);
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
     axiosInstance
       .get(`/available-cars?sort=${sort}&search=${search}`)
-      .then((res) => setCars(res.data));
+      .then((res) => {
+        setCars(res.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [sort, search]);
+
   return (
     <div className="lg:container mx-auto p-6">
       {/* Sorting and Search Section */}
@@ -27,8 +35,8 @@ const AvailableCars = () => {
             id="sortOrder"
           >
             <option value="">Default Order</option>
-            <option value="priceHighToLow">Lowest First </option>
-            <option value="priceLowToHigh"> Highest First</option>
+            <option value="priceHighToLow">Lowest First</option>
+            <option value="priceLowToHigh">Highest First</option>
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
           </select>
@@ -67,17 +75,23 @@ const AvailableCars = () => {
 
       {/* Cars Display Section */}
       <div>
-        <div
-          className={`${
-            isTog
-              ? "grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-              : "flex flex-col gap-6"
-          }`}
-        >
-          {cars.map((car) => (
-            <CarCard isTog={isTog} car={car} key={car._id} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <div
+            className={`${
+              isTog
+                ? "grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                : "flex flex-col gap-6"
+            }`}
+          >
+            {cars.map((car) => (
+              <CarCard isTog={isTog} car={car} key={car._id} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
