@@ -28,9 +28,16 @@ const CarCard = ({ car, isTog }) => {
     const hours = Math.floor(
       (differenceInMilliseconds / (1000 * 60 * 60)) % 24
     );
+    const minutes = Math.floor((differenceInMilliseconds / (1000 * 60)) % 60);
+    const seconds = Math.floor((differenceInMilliseconds / 1000) % 60);
 
     if (days > 0) return `Added ${days} day${days > 1 ? "s" : ""} ago`;
     if (hours > 0) return `Added ${hours} hour${hours > 1 ? "s" : ""} ago`;
+    if (minutes > 0)
+      return `Added ${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+    if (seconds > 0)
+      return `Added ${seconds} second${seconds > 1 ? "s" : ""} ago`;
+
     return "Added just now";
   };
 
@@ -51,44 +58,47 @@ const CarCard = ({ car, isTog }) => {
         <p
           className={`${
             availability === "Unavailable" ? "bg-red-700" : "bg-green-500"
-          } text-white px-4 py-2 text-sm font-bold text-center absolute top-4 left-4 rounded-md`}
+          } text-white px-4 py-2 text-sm  text-center absolute top-4 left-4 rounded-md`}
         >
           {availability}
         </p>
       </div>
 
       {/* Car Details Section */}
-      <div className="px-6 pb-6">
+      <div className="px-5 relative pb-6">
+        <p className="absolute bg-[#FFE9EB] px-2 border rounded-full -top-3 z-30 text-[#FF2C3B] right-1">
+          Booking{" "}
+          <span className="text-[#FF2C3B] font-bold">{bookingCount}</span>
+        </p>
         {/* Car Model */}
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-gray-800">{model}</h2>
-          <p>Booking{bookingCount}</p>
         </div>
         {/* Location */}
         <div className="flex items-center text-gray-600 mt-2">
           <FaLocationDot className="mr-2" /> <p>{location}</p>
         </div>
         {/*  */}
-        <div className="grid grid-cols-2 border-t pt-4 text-xl text-[#FF2C61]">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-b pt-4 pb-4 text-xl ">
           <p className="flex gap-1  items-center">
-            <MdOutlineAirlineSeatReclineNormal />
+            <MdOutlineAirlineSeatReclineNormal className="text-[#FF2C61]" />
             <span> {passengers}</span> Seats
           </p>
           <p className="flex gap-1  items-center">
-            <GiGearStick />
+            <GiGearStick className="text-[#FF2C61]" />
             <span> {gear}</span>
           </p>
           <p className="flex gap-1  items-center">
-            <GiCarDoor />
+            <GiCarDoor className="text-[#FF2C61]" />
             <span> {doors}</span> Doors
           </p>
           <p className="flex gap-1  items-center">
-            <FaGasPump />
+            <FaGasPump className="text-[#FF2C61]" />
             <span> {fuel}</span>
           </p>
         </div>
         {/* Pricing */}
-        <div className="mt-4 text-lg font-medium text-gray-700">
+        <div className=" text-lg font-medium text-gray-700">
           <h3>
             Starting From{" "}
             <span className="text-2xl text-[#F0151F]">${dailyRentalPrice}</span>{" "}
@@ -101,7 +111,7 @@ const CarCard = ({ car, isTog }) => {
         </p>
         {/* Booking Button */}
         <Link to={`/carDetails/${_id}`}>
-          <button className="w-full py-3 mt-6 bg-[#ECF0F4] text-xl font-medium text-[#333] rounded-lg group-hover:bg-[#F0151F] transition-all hover:text-white duration-300">
+          <button className="w-full py-3 mt-6 bg-[#ECF0F4] text-xl font-medium text-[#333] rounded-lg group-hover:bg-[#FF2C3B] transition-all group-hover:text-white duration-300">
             Book Now
           </button>
         </Link>

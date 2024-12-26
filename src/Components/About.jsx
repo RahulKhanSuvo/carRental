@@ -7,10 +7,10 @@ import { useInView } from "react-intersection-observer";
 
 const About = () => {
   const counters = [
-    { number: 990, label: "CARS RENTOUTS", icon: <FaCarAlt size={30} /> },
-    { number: 230, label: "CENTER SOLUTIONS", icon: <FaBuilding size={30} /> },
-    { number: 75, label: "LOCATIONS", icon: <FaMapMarkerAlt size={30} /> },
-    { number: 690, label: "HAPPY CUSTOMER", icon: <GrLike size={30} /> },
+    { number: 990, label: "CARS RENTOUTS", icon: <FaCarAlt /> },
+    { number: 230, label: "CENTER SOLUTIONS", icon: <FaBuilding /> },
+    { number: 75, label: "LOCATIONS", icon: <FaMapMarkerAlt /> },
+    { number: 690, label: "HAPPY CUSTOMER", icon: <GrLike /> },
   ];
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -30,19 +30,22 @@ const About = () => {
     >
       <div className="flex flex-col lg:flex-row lg:container mx-auto justify-between items-center gap-6">
         {/* Text Section */}
-        <div className="w-full md:w-1/2">
-          <h3 className="text-6xl font-bold text-white mb-6">
+        <div className="w-full md:w-2/3">
+          <p className="uppercase text-base w-fit  px-3 rounded-full   text-[#ff2c3b]">
+            fun facts
+          </p>
+          <h3 className="lg:text-6xl text-xl md:text-4xl text-center lg:text-left    font-bold text-white mb-6">
             Save Time & Money with Top Car Rent Services
           </h3>
         </div>
 
         {/* Counter Section */}
-        <div className="w-full flex gap-4 justify-center">
+        <div className="w-full flex items-center flex-col md:flex-row gap-4 justify-center">
           {counters.map((counter, index) => (
             <div className="relative" key={index}>
-              <div className="bg-[#FF2C3B] size-40 rounded-full flex justify-center text-center items-center shadow-lg">
+              <div className="bg-[#FF2C3B]  size-28 lg:size-40 rounded-full flex justify-center text-center items-center shadow-lg">
                 <div className="text-center">
-                  <h3 className="text-white text-3xl font-bold">
+                  <h3 className="text-white lg:text-3xl font-bold">
                     {inView ? (
                       <CountUp
                         start={0}
@@ -54,12 +57,12 @@ const About = () => {
                       0
                     )}
                   </h3>
-                  <p className="text-[#FFA9A4] text-sm font-medium leading-tight">
+                  <p className="text-[#FFA9A4]  text-xs md:text-sm font-medium leading-tight">
                     {counter.label}
                   </p>
                 </div>
               </div>
-              <p className="absolute top-0 right-0 bg-white p-4 rounded-full">
+              <p className="absolute lg:text-3xl top-0 right-0 bg-white p-3 md:p-4 rounded-full">
                 {counter.icon}
               </p>
             </div>

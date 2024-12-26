@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="bg-[#10100F]">
-      <div className="lg:container grid grid-cols-4 mx-auto py-20">
+      <div className="lg:container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto py-20">
         {/* Logos */}
         <div>
           <img className="w-36" src={logo} alt="Logo" />

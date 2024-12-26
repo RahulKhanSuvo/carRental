@@ -19,12 +19,12 @@ const Banner = () => {
         }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <div className="text-center max-w-4xl  text-white space-y-6">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold drop-shadow-lg">
+        <div className="text-center max-w-5xl  text-white space-y-6">
+          <h1 className="text-4xl capitalize  md:text-6xl lg:text-7xl font-bold drop-shadow-lg">
             Looking to save more on your rental car?
           </h1>
           <Link to="/availableCar">
-            <button className="bg-[#FF2C3B] mt-6 text-white py-5  px-14 text-lg md:text-xl font-semibold rounded-md shadow-lg hover:bg-[#FF2C3B]">
+            <button className="bg-[#FF2C3B] transition duration-300  hover:bg-[#060605]  mt-6 text-white py-5  px-14 text-lg md:text-xl font-semibold rounded-md shadow-lg ">
               View Available
             </button>
           </Link>

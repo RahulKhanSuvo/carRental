@@ -4,7 +4,7 @@ import image2 from "../assets/discouts/banner-bg-2.png";
 import image3 from "../assets/discouts/banner-bg-3.png";
 const Discount = () => {
   return (
-    <div className="lg:container lg:mx-auto grid md:grid-cols-2 lg:grid-cols-3 mb-10 gap-6 md:mx-6 mx-4">
+    <div className="lg:container lg:mx-auto grid md:grid-cols-2 lg:grid-cols-3 mb-10 gap-6 py-16 md:mx-6 mx-4">
       <DiscountCard
         title={"Weekend deals"}
         subtitle={"15%"}

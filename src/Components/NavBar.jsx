@@ -68,10 +68,10 @@ const NavBar = () => {
     <nav className="fixed w-full top-0 z-50 bg-white shadow-md">
       <div className="flex lg:container py-4 px-6 mx-auto justify-between items-center">
         {/* Logo */}
-        <img className="w-36" src={logo} alt="Logo" />
+        <img className="md:w-48 w-32" src={logo} alt="Logo" />
 
         {/* Links */}
-        <div className="flex gap-5 text-gray-700">{links}</div>
+        <div className="md:flex gap-5 text-gray-700 hidden ">{links}</div>
 
         {/* Authentication */}
         <div className="flex items-center gap-4">
@@ -82,12 +82,12 @@ const NavBar = () => {
                 <img
                   src={user?.photoURL}
                   alt="User Avatar"
-                  className="w-10 h-10 rounded-full border-2 border-gray-300"
+                  className="size-16 rounded-full border-2 border-gray-300"
                 />
               )}
               <button
                 onClick={logOut}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                className=" text-[#FF2C3B] text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  py-2 px-8 rounded "
               >
                 Logout
               </button>
@@ -95,12 +95,12 @@ const NavBar = () => {
           ) : (
             <div className="flex gap-4">
               <Link to={"/login"}>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                <button className=" text-[#FF2C3B] text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  py-2 px-8 rounded ">
                   Sign In
                 </button>
               </Link>
               <Link to={"/register"}>
-                <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                <button className=" text-[#FF2C3B] text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  py-2 px-8 rounded ">
                   Register
                 </button>
               </Link>

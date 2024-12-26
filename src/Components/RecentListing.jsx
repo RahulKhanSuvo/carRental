@@ -21,20 +21,20 @@ const RecentListing = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${bg})`,
-            height: "60vh", // 30% height
+            height: "60vh",
           }}
         ></div>
-        <div className="absolute inset-0 bg-blue-500 bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-blue-500 bg-opacity-60"></div>
       </div>
 
       {/* Cars Listing Section */}
       <div className="lg:container mx-auto  py-16 -mt-20 relative z-10">
         <div className="text-center mb-12">
-          <p className="text-center text-[#ff3726] text-sm">
-            CHECKOUT NEW CARS
+          <p className="text-base w-fit mx-auto px-3 rounded-full  bg-[#FFE9EB]  text-[#ff2c3b]">
+            RECENT CARS
           </p>
-          <h3 className="text-5xl font-bold text-[#0c142e]">
-            Cars We’re Offering for Rentals
+          <h3 className="text-4xl mt-6 font-bold text-[#0c142e]">
+            Recently Added Cars for You
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

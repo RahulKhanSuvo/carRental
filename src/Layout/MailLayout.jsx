@@ -7,7 +7,7 @@ const MainLayout = () => {
     <div className="flex flex-col min-h-screen">
       <NavBar />
 
-      <div className="flex-grow pt-20 bg-gray-50">
+      <div className="flex-grow pt-[95px] bg-gray-50">
         <Outlet />
       </div>
 
