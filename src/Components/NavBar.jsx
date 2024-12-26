@@ -3,7 +3,7 @@ import logo from "../assets/Logo/logo_v4.png";
 import useAuth from "../Hooks/useAuth";
 const NavBar = () => {
   const { user, logOut } = useAuth();
-  console.log(user);
+
   const links = (
     <>
       <NavLink to={"/"}>Home</NavLink>

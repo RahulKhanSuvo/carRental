@@ -1,10 +1,11 @@
 import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/UseAxios";
 
 const AddCar = () => {
   const { user } = useAuth();
-
+  const axiosSecure = useAxiosSecure();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -28,9 +29,9 @@ const AddCar = () => {
         photo: user.photoURL,
       },
     };
-    console.log(finalData);
+
     try {
-      await axios.post("http://localhost:5000/add-car", finalData);
+      await axiosSecure.post("/add-car", finalData);
 
       Swal.fire({
         title: "Car Added Successfully!",

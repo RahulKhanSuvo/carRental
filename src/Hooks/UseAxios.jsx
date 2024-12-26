@@ -17,10 +17,11 @@ const useAxiosSecure = () => {
       },
       async (error) => {
         console.log("error from ");
-        if (error.response.status === 401 || error.response.status === 400) {
+        if (error.response.status === 401 || error.response.status === 403) {
           logOut();
           navigate("/login");
         }
+        console.log(error);
       }
     );
   }, [logOut, navigate]);

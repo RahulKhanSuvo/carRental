@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import { format } from "date-fns";
@@ -16,6 +15,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import useAxiosSecure from "../Hooks/UseAxios";
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +27,7 @@ ChartJS.register(
 );
 
 const MyBooking = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
   const [isDone, setDone] = useState("");
@@ -36,20 +37,16 @@ const MyBooking = () => {
   useEffect(() => {
     axiosSecure
       .get(`/my-bookings/${user.email}`)
-      .then((res) => setBookings(res.data))
-      .catch((err) => console.error("Error fetching bookings:", err));
-  }, [user.email, isDone, isModalOpen]);
+      .then((res) => setBookings(res.data));
+  }, [user.email, isDone, isModalOpen, axiosSecure]);
 
   const handleModifyBooking = async (bookingId) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:5000/single-booking/${bookingId}`
-      );
+      const { data } = await axiosSecure.get(`/single-booking/${bookingId}`);
       setOnlyBooking(data);
       setIsModalOpen(true);
-      console.log(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -65,8 +62,8 @@ const MyBooking = () => {
       confirmButtonText: "Yes",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .patch(`http://localhost:5000/booking-status/${bookingId}`, {
+        await axiosSecure
+          .patch(`/booking-status/${bookingId}`, {
             status,
           })
           .then(() => {

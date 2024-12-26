@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
+import useAxiosSecure, { axiosSecure } from "../Hooks/UseAxios";
 const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
   if (!isOpen) return null;
   const [pickup, setPickup] = useState(() =>
@@ -37,10 +38,7 @@ const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
     }
 
     try {
-      await axios.patch(
-        `http://localhost:5000/date-update/${onlyBooking._id}`,
-        updateData
-      );
+      await axiosSecure.patch(`/date-update/${onlyBooking._id}`, updateData);
 
       Swal.fire({
         title: "Modify Confirmed!",
@@ -51,7 +49,6 @@ const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
       setDone("by modal");
       onClose();
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Error",

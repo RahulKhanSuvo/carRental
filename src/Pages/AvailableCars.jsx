@@ -1,18 +1,17 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import CarCard from "../Components/CarCard";
 import { FaThList } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
+import { axiosInstance } from "../Hooks/AxiosInstance";
 
 const AvailableCars = () => {
   const [cars, setCars] = useState([]);
   const [isTog, setTog] = useState(true);
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
-  console.log(cars);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/available-cars?sort=${sort}&search=${search}`)
+    axiosInstance
+      .get(`/available-cars?sort=${sort}&search=${search}`)
       .then((res) => setCars(res.data));
   }, [sort, search]);
 
@@ -28,9 +27,7 @@ const AvailableCars = () => {
             name="sortOrder"
             id="sortOrder"
           >
-            <option value="default" selected>
-              Default Order
-            </option>
+            <option value="">Default Order</option>
             <option value="priceHighToLow">Price High To Low</option>
             <option value="priceLowToHigh">Price Low To High</option>
             <option value="newest">Newest Properties</option>

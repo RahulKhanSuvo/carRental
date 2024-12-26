@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import CarCard from "./CarCard";
 import bg from "../assets/bg-color-container-dodge2-testimonial.jpg";
+import { axiosInstance } from "../Hooks/AxiosInstance";
 
 const RecentListing = () => {
   const [cars, setCars] = useState([]);
   const isTog = true;
 
   useEffect(() => {
-    axios.get("http://localhost:5000/recent-cars").then((res) => {
+    axiosInstance.get("/recent-cars").then((res) => {
       setCars(res.data);
     });
   }, []);

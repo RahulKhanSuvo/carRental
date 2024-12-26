@@ -1,7 +1,7 @@
-import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { axiosInstance } from "../Hooks/AxiosInstance";
 const CustomModal = ({ isOpen, onClose, onlyCar }) => {
   const { user } = useAuth();
 
@@ -93,11 +93,11 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     };
 
     try {
-      const { data } = await axios.patch(
-        `http://localhost:5000/carUpdate/${_id}`,
+      const { data } = await axiosInstance.patch(
+        `/carUpdate/${_id}`,
         finalData
       );
-      console.log(data);
+      // console.log(data);
       if (data.modifiedCount > 0) {
         Swal.fire({
           title: "Success!",
@@ -123,7 +123,7 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
         });
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       Swal.fire({
         icon: "error",
         title: "Error",

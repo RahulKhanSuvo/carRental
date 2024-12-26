@@ -11,6 +11,7 @@ import {
 import AuthContext from "../Context/AuthContext";
 import auth from "../firebase/firebase.config";
 import axios from "axios";
+import { axiosInstance } from "../Hooks/AxiosInstance";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -43,19 +44,19 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log("current user", currentUser);
+        // console.log("current user", currentUser);
         setUser(currentUser);
         setLoading(false);
 
-        await axios.post(
-          "http://localhost:5000/jwt",
+        await axiosInstance.post(
+          "/jwt",
           {
             email: currentUser.email,
           },
           { withCredentials: true }
         );
       } else {
-        await axios.get("http://localhost:5000/logout", {
+        await axiosInstance.get("/logout", {
           withCredentials: true,
         });
         setLoading(false);

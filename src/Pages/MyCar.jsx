@@ -4,7 +4,9 @@ import useAuth from "../Hooks/useAuth";
 import CustomModal from "../Modal/CustomModal";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/UseAxios";
 const MyCar = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [cars, setCars] = useState([]);
   const [onlyCar, setOnlyCar] = useState([]);
@@ -13,10 +15,10 @@ const MyCar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/myCar/${user.email}?sort=${sort}`)
+    axiosSecure
+      .get(`/myCar/${user.email}?sort=${sort}`)
       .then((res) => setCars(res.data));
-  }, [user.email, isModalOpen, sort]);
+  }, [user.email, isModalOpen, sort, axiosSecure]);
 
   // Handle delete action
   const handleDelete = async (id) => {
@@ -38,9 +40,7 @@ const MyCar = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axios.delete(
-            `http://localhost:5000/car-delete/${id}`
-          );
+          const { data } = await axiosSecure.delete(`/car-delete/${id}`);
           if (data.deletedCount > 0) {
             const remining = cars.filter((car) => car._id !== id);
             setCars(remining);
@@ -72,7 +72,7 @@ const MyCar = () => {
 
   const handelUpdate = async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/viewCar/${id}`);
+      const { data } = await axiosSecure.get(`/viewCar/${id}`);
       setOnlyCar(data);
       setIsModalOpen(true);
     } catch (error) {

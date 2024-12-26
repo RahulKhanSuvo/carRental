@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import DatePicker from "react-datepicker";
@@ -10,9 +9,11 @@ import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { GiCarDoor, GiGearStick } from "react-icons/gi";
 import { FaGasPump } from "react-icons/fa6";
 import { IoMdCheckmarkCircle } from "react-icons/io";
+import { axiosInstance } from "../Hooks/AxiosInstance";
 
 const CarDetails = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [car, setCar] = useState(null);
   const [pickupDate, setPickupDate] = useState(new Date());
   const [dropoffDate, setDropoffDate] = useState(new Date());
@@ -21,8 +22,8 @@ const CarDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/car-details/${id}`)
+    axiosInstance
+      .get(`/car-details/${id}`)
       .then((res) => setCar(res.data))
       .catch((error) => console.error("Error fetching car details:", error));
   }, [id]);
@@ -49,7 +50,6 @@ const CarDetails = () => {
     availability,
     dailyRentalPrice,
     description,
-    bookingStatus,
     user: rentUser,
     fuel,
     gear,
@@ -59,6 +59,9 @@ const CarDetails = () => {
   } = car;
 
   const handleBookNow = async () => {
+    if (!user) {
+      return navigate("/login");
+    }
     if (!pickupDate || !dropoffDate || totalPrice <= 0) {
       Swal.fire({
         title: "Invalid Dates!",
@@ -110,7 +113,7 @@ const CarDetails = () => {
             },
           };
 
-          await axios.post("http://localhost:5000/bookings", bookingPayload);
+          await axiosInstance.post("/bookings", bookingPayload);
           Swal.fire({
             title: "Booking Confirmed!",
             text: `Your booking for ${model} has been confirmed.`,
