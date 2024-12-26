@@ -12,7 +12,7 @@ const NavBar = () => {
         className={({ isActive }) =>
           isActive
             ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-            : "hover:text-blue-500 text-lg font-semibold transition-colors"
+            : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
         }
       >
         Home
@@ -22,7 +22,7 @@ const NavBar = () => {
         className={({ isActive }) =>
           isActive
             ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-            : "hover:text-blue-500 text-lg font-semibold transition-colors"
+            : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
         }
       >
         Available Cars
@@ -34,7 +34,7 @@ const NavBar = () => {
             className={({ isActive }) =>
               isActive
                 ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-                : "hover:text-blue-500 text-lg font-semibold transition-colors"
+                : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
             }
           >
             Add Car
@@ -44,7 +44,7 @@ const NavBar = () => {
             className={({ isActive }) =>
               isActive
                 ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-                : "hover:text-blue-500 text-lg font-semibold transition-colors"
+                : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
             }
           >
             My Cars
@@ -54,7 +54,7 @@ const NavBar = () => {
             className={({ isActive }) =>
               isActive
                 ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-                : "hover:text-blue-500 text-lg font-semibold transition-colors"
+                : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
             }
           >
             My Bookings
