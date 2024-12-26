@@ -52,16 +52,16 @@ const AddCar = () => {
   };
 
   return (
-    <div className="lg:container mx-4 lg:mx-auto">
+    <div className="lg:container mx-4 mt-5 lg:mx-auto">
       <h2 className="text-2xl  w-full font-bold mb-6 text-center">
         Add a New Car
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 max-w-3xl w-full mx-auto md:grid-cols-3 gap-6"
+        className="lg:grid grid-cols-1 max-w-3xl w-full mx-auto  gap-6"
       >
         {/* Car Model */}
-        <div>
+        <div className="">
           <label className="font-medium text-gray-700 block" htmlFor="carModel">
             Car Model
           </label>
@@ -158,7 +158,7 @@ const AddCar = () => {
         </div>
 
         {/* Features */}
-        <div className="col-span-3 grid grid-cols-4 gap-6">
+        <div className="lg:col-span-3 md:grid grid-cols-4 gap-6">
           <div className="col-span-3">
             <label
               htmlFor="features"
@@ -166,7 +166,7 @@ const AddCar = () => {
             >
               Features
             </label>
-            <div className="space-x-2 border rounded-lg p-2 grid grid-cols-3 ">
+            <div className="space-x-2 border rounded-lg p-2 grid grid-cols-2 md:grid-cols-3 ">
               {[
                 "GPS",
                 "AC",
@@ -202,7 +202,6 @@ const AddCar = () => {
               name="bookingCount"
               placeholder="Enter count"
               defaultValue={0}
-              readOnly
               className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />

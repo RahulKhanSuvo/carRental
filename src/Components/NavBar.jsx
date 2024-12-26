@@ -1,10 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/Logo/logo_v4.png";
 import useAuth from "../Hooks/useAuth";
-
+import { ImMenu } from "react-icons/im";
+import { useState } from "react";
+import { RiCloseLargeFill } from "react-icons/ri";
 const NavBar = () => {
   const { user, logOut } = useAuth();
-  console.log(user?.photoURL);
+  const [isActive, setActive] = useState(true);
   const links = (
     <>
       <NavLink
@@ -67,11 +69,22 @@ const NavBar = () => {
   return (
     <nav className="fixed w-full top-0 z-50 bg-white shadow-md">
       <div className="flex lg:container py-4 px-6 mx-auto justify-between items-center">
+        {/* menu for tab and mb */}
+        <button
+          className="text-[#FF2C3B] lg:hidden"
+          onClick={() => setActive(!isActive)}
+        >
+          {isActive ? (
+            <ImMenu className="text-3xl" />
+          ) : (
+            <RiCloseLargeFill className="text-3xl font-black" />
+          )}
+        </button>
         {/* Logo */}
         <img className="md:w-48 w-32" src={logo} alt="Logo" />
 
         {/* Links */}
-        <div className="md:flex gap-5 text-gray-700 hidden ">{links}</div>
+        <div className="lg:flex gap-5 text-gray-700 hidden ">{links}</div>
 
         {/* Authentication */}
         <div className="flex items-center gap-4">
@@ -106,6 +119,11 @@ const NavBar = () => {
               </Link>
             </div>
           )}
+        </div>
+      </div>
+      <div className={`${isActive ? "hidden" : ""}`}>
+        <div className="bg-white lg:hidden h-52 flex flex-col pl-10">
+          {links}
         </div>
       </div>
     </nav>

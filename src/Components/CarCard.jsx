@@ -44,7 +44,7 @@ const CarCard = ({ car, isTog }) => {
   return (
     <div
       className={`${
-        isTog ? "" : "flex flex-col md:flex-row items-center items-center "
+        isTog ? "" : "flex flex-col md:flex-row md:items-center  "
       } shadow-lg rounded-lg overflow-hidden group bg-white transition-transform transform duration-500 hover:scale-105 hover:shadow-2xl`}
     >
       {/* Car Image Section */}

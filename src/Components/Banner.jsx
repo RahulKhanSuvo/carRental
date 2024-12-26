@@ -23,7 +23,7 @@ const Banner = () => {
       >
         <div className="text-center max-w-5xl  text-white space-y-6">
           <h1 className="text-4xl capitalize  md:text-6xl lg:text-7xl font-bold drop-shadow-lg">
-            Looking to save more on your rental car?
+            Elevate Every Journey – Drive Your Dreams Today!
           </h1>
           <Link to="/availableCar">
             <button className="bg-[#FF2C3B] transition duration-300  hover:bg-[#060605]  mt-6 text-white py-5  px-14 text-lg md:text-xl font-semibold rounded-md shadow-lg ">
