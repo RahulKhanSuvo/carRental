@@ -28,10 +28,10 @@ const AvailableCars = () => {
             id="sortOrder"
           >
             <option value="">Default Order</option>
-            <option value="priceHighToLow">Price High To Low</option>
-            <option value="priceLowToHigh">Price Low To High</option>
-            <option value="newest">Newest Properties</option>
-            <option value="oldest">Oldest Properties</option>
+            <option value="priceHighToLow">Lowest First </option>
+            <option value="priceLowToHigh"> Highest First</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
           </select>
         </div>
         <div className="flex items-center space-x-4">

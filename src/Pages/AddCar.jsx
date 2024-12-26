@@ -1,4 +1,3 @@
-import axios from "axios";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/UseAxios";
@@ -6,6 +5,7 @@ import useAxiosSecure from "../Hooks/UseAxios";
 const AddCar = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -70,6 +70,7 @@ const AddCar = () => {
             name="model"
             placeholder="Enter car model"
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
@@ -87,6 +88,7 @@ const AddCar = () => {
             name="dailyRentalPrice"
             placeholder="Enter daily rental price"
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
@@ -101,6 +103,7 @@ const AddCar = () => {
           <select
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             name="availability"
+            required
           >
             <option value="Available">Available</option>
             <option value="Unavailable">Unavailable</option>
@@ -121,8 +124,10 @@ const AddCar = () => {
             name="vehicleRegNumber"
             placeholder="Enter registration number"
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
+
         {/* Image URL */}
         <div>
           <label htmlFor="imageUrl" className="block font-medium text-gray-700">
@@ -134,6 +139,7 @@ const AddCar = () => {
             name="imageUrl"
             placeholder="Enter image URL"
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
@@ -147,6 +153,7 @@ const AddCar = () => {
             name="location"
             placeholder="Enter location"
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
@@ -197,6 +204,7 @@ const AddCar = () => {
               defaultValue={0}
               readOnly
               className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
         </div>
@@ -215,6 +223,7 @@ const AddCar = () => {
             placeholder="Enter car description"
             rows="4"
             className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
@@ -236,6 +245,7 @@ const AddCar = () => {
               <select
                 className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="doors"
+                required
               >
                 {[2, 3, 4, 5].map((door) => (
                   <option key={door} value={door}>
@@ -252,6 +262,7 @@ const AddCar = () => {
               <select
                 className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="fuel"
+                required
               >
                 <option value="Petrol">Petrol</option>
                 <option value="Diesel">Diesel</option>
@@ -273,6 +284,7 @@ const AddCar = () => {
               <select
                 className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="passengers"
+                required
               >
                 {[2, 3, 4, 5, 6, 7].map((passenger) => (
                   <option key={passenger} value={passenger}>
@@ -289,9 +301,10 @@ const AddCar = () => {
               <select
                 className="w-full mt-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="gear"
+                required
               >
-                <option value="Manual">Manual</option>
                 <option value="Automatic">Automatic</option>
+                <option value="Manual">Manual</option>
               </select>
             </div>
           </div>
