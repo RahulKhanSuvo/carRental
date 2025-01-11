@@ -39,7 +39,11 @@ const CarDetails = () => {
   }, [pickupDate, dropoffDate, car]);
 
   if (!car) {
-    return <p className="text-center mt-10 text-xl">Loading car details...</p>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   const {
@@ -120,6 +124,10 @@ const CarDetails = () => {
             icon: "success",
             background: "#f9f9f9",
           });
+          setCar((prevCar) => ({
+            ...prevCar,
+            bookingCount: prevCar.bookingCount + 1,
+          }));
         } catch (error) {
           Swal.fire({
             title: "Booking Failed!",
@@ -133,12 +141,16 @@ const CarDetails = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="lg:container mx-auto md:p-6">
       <div className="grid gap-6 grid-cols-1 md:grid-cols-4">
         {/* Left Section: Car Details */}
         <div className="col-span-3">
           <div className="">
-            <img className="w-full h-[500px] " src={imageUrl} alt={model} />
+            <img
+              className="w-full md:h-[400px] lg:h-[600px] rounded-t-md object-cover "
+              src={imageUrl}
+              alt={model}
+            />
           </div>
           <div className="bg-white rounded-lg p-6 shadow-lg">
             <div className="flex justify-between items-center">
@@ -147,7 +159,9 @@ const CarDetails = () => {
                 {location}
               </p>
               <p className="flex gap-2 items-center">
-                <span>{bookingCount}</span>{" "}
+                <span className={`${!bookingCount && "hidden"}`}>
+                  {bookingCount}
+                </span>{" "}
                 {bookingCount === 0 ? "No bookings yet" : "Bookings"}
               </p>
             </div>

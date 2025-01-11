@@ -4,6 +4,7 @@ import { GrLike } from "react-icons/gr";
 import { FaMapMarkerAlt, FaCarAlt } from "react-icons/fa";
 import { FaBuilding } from "react-icons/fa6";
 import { useInView } from "react-intersection-observer";
+import { Fade, Flip, JackInTheBox } from "react-awesome-reveal";
 
 const About = () => {
   const counters = [
@@ -34,38 +35,42 @@ const About = () => {
           <p className="uppercase text-base w-fit  px-3 rounded-full   text-[#ff2c3b]">
             fun facts
           </p>
-          <h3 className="lg:text-6xl text-xl md:text-4xl text-center lg:text-left    font-bold text-white mb-6">
-            Save Time & Money with Top Car Rent Services
-          </h3>
+          <Fade triggerOnce direction="left">
+            <h3 className="lg:text-6xl text-xl md:text-4xl text-center lg:text-left    font-bold text-white mb-6">
+              Save Time & Money with Top Car Rent Services
+            </h3>
+          </Fade>
         </div>
 
         {/* Counter Section */}
         <div className="w-full flex  items-center flex-col md:flex-row gap-4 justify-center">
           {counters.map((counter, index) => (
-            <div className="relative" key={index}>
-              <div className="bg-[#FF2C3B]  size-28 lg:size-40 rounded-full flex justify-center text-center items-center shadow-lg">
-                <div className="text-center">
-                  <h3 className="text-white lg:text-3xl font-bold">
-                    {inView ? (
-                      <CountUp
-                        start={0}
-                        end={counter.number}
-                        duration={6}
-                        delay={0}
-                      />
-                    ) : (
-                      0
-                    )}
-                  </h3>
-                  <p className="text-[#FFA9A4]  text-xs md:text-sm font-medium leading-tight">
-                    {counter.label}
-                  </p>
+            <JackInTheBox triggerOnce key={index}>
+              <div className="relative">
+                <div className="bg-[#FF2C3B]  size-28 lg:size-40 rounded-full flex justify-center text-center items-center shadow-lg">
+                  <div className="text-center">
+                    <h3 className="text-white lg:text-3xl font-bold">
+                      {inView ? (
+                        <CountUp
+                          start={0}
+                          end={counter.number}
+                          duration={6}
+                          delay={0}
+                        />
+                      ) : (
+                        0
+                      )}
+                    </h3>
+                    <p className="text-[#FFA9A4]  text-xs md:text-sm font-medium leading-tight">
+                      {counter.label}
+                    </p>
+                  </div>
                 </div>
+                <p className="absolute lg:text-3xl top-0 right-0 bg-white p-3 md:p-4 rounded-full">
+                  {counter.icon}
+                </p>
               </div>
-              <p className="absolute lg:text-3xl top-0 right-0 bg-white p-3 md:p-4 rounded-full">
-                {counter.icon}
-              </p>
-            </div>
+            </JackInTheBox>
           ))}
         </div>
       </div>

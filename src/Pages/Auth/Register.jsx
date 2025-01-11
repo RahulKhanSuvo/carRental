@@ -87,8 +87,8 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-8">
+    <div className=" min-h-screen pt-16 bg-gray-100">
+      <div className="w-full max-w-lg mx-auto  bg-white shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Create Your Account
         </h2>
@@ -168,7 +168,7 @@ const Register = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white font-medium rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full py-3 bg-[#FF2C3B] text-white font-medium rounded-md hover:bg-[#961119] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Register
           </button>

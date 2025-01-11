@@ -34,55 +34,60 @@ const Login = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-md p-4 border border-gray-300 rounded-md shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Sign Into Your Account
-      </h2>
-      <form onSubmit={handleLogin} className="space-y-4">
-        {/* Email Input */}
-        <div>
-          <label htmlFor="email" className="block text-gray-700 font-medium">
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-          />
-        </div>
+    <section className="min-h-screen pt-16">
+      <div className="container flx mx-auto   max-w-lg p-4 border border-gray-300 rounded-md shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-center">
+          Sign Into Your Account
+        </h2>
+        <form onSubmit={handleLogin} className="space-y-4">
+          {/* Email Input */}
+          <div>
+            <label htmlFor="email" className="block text-gray-700 font-medium">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
 
-        {/* Password Input */}
-        <div>
-          <label htmlFor="password" className="block text-gray-700 font-medium">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-          />
-        </div>
+          {/* Password Input */}
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-medium"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
 
-        {/* Login Button */}
-        <button
-          type="submit"
-          className="w-full py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600"
-        >
-          Login
-        </button>
-      </form>
+          {/* Login Button */}
+          <button
+            type="submit"
+            className="w-full py-2 bg-[#FF2C3B] text-white font-medium rounded-md hover:bg-[#961119]"
+          >
+            Login
+          </button>
+        </form>
 
-      <p className="text-center mt-4 text-gray-600">Or Login With</p>
+        <p className="text-center mt-4 text-gray-600">Or Login With</p>
 
-      {/* Google Login Button */}
-      <SocialLogin></SocialLogin>
-    </div>
+        {/* Google Login Button */}
+        <SocialLogin></SocialLogin>
+      </div>
+    </section>
   );
 };
 

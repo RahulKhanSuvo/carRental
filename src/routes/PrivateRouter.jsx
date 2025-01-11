@@ -5,7 +5,11 @@ const PrivateRouter = ({ children }) => {
   const location = useLocation();
   const { user, loading } = useAuth();
   if (loading) {
-    return <h3>Loading</h3>;
+    return (
+      <div className="flex justify-center  min-h-screen items-center h-64">
+        <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
+      </div>
+    );
   }
   if (user) {
     return children;

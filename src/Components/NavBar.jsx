@@ -67,7 +67,7 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-white shadow-md">
+    <nav className="sticky backdrop-blur-sm w-full top-0 z-50 bg-white shadow-md">
       <div className="flex lg:container py-4 md:px-6 px-4 lg:mx-auto justify-between items-center">
         {/* menu for tab and mb */}
         <button
@@ -86,7 +86,7 @@ const NavBar = () => {
           <img className="md:w-48 w-24" src={logo} alt="Logo" />
         </Link>
 
-        {/* Links */}
+        {/* Links for lg */}
         <div className="lg:flex gap-5 text-gray-700 hidden ">{links}</div>
 
         {/* Authentication */}
@@ -111,12 +111,12 @@ const NavBar = () => {
           ) : (
             <div className="flex gap-4">
               <Link to={"/login"}>
-                <button className=" text-[#FF2C3B] text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  py-2 px-8 rounded ">
+                <button className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-2 md:px-8 px-2 rounded  ">
                   Sign In
                 </button>
               </Link>
               <Link to={"/register"}>
-                <button className=" text-[#FF2C3B] text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  py-2 px-8 rounded ">
+                <button className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-2 md:px-8 px-2 rounded  ">
                   Register
                 </button>
               </Link>
@@ -124,8 +124,9 @@ const NavBar = () => {
           )}
         </div>
       </div>
-      <div className={`${isActive ? "hidden" : ""}`}>
-        <div className="bg-white border lg:hidden h-52 flex flex-col pl-6">
+      {/* nav for mb */}
+      <div className={`${isActive ? "hidden" : "fixed w-full"}`}>
+        <div className="bg-white border lg:hidden  flex flex-col p-6">
           {links}
         </div>
       </div>

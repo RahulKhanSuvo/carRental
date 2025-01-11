@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CarCard from "./CarCard";
 import bg from "../assets/bg-color-container-dodge2-testimonial.jpg";
 import { axiosInstance } from "../Hooks/AxiosInstance";
+import { Fade } from "react-awesome-reveal";
 
 const RecentListing = () => {
   const [cars, setCars] = useState([]);
@@ -37,9 +38,18 @@ const RecentListing = () => {
             Recently Added Cars for You
           </h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-4 lg:grid-cols-4  lg:gap-6">
           {cars.map((car) => (
-            <CarCard key={car._id} isTog={isTog} car={car}></CarCard>
+            <Fade
+              triggerOnce
+              delay={200}
+              key={car._id}
+              cascade={true}
+              damping={0.3}
+            >
+              <CarCard isTog={isTog} car={car}></CarCard>
+            </Fade>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { FaGasPump, FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { Fade } from "react-awesome-reveal";
 import { MdOutlineAirlineSeatReclineNormal } from "react-icons/md";
 import { GiCarDoor, GiGearStick } from "react-icons/gi";
 const CarCard = ({ car, isTog }) => {
@@ -51,8 +52,8 @@ const CarCard = ({ car, isTog }) => {
       <div className="overflow-hidden relative">
         <img
           className={`${
-            isTog ? "md:h-80 w-full" : " w-[500px] lg:w-[700px] md:h-80"
-          }   h-full object-cover transition-transform duration-300 group-hover:scale-110`}
+            isTog ? "h-56 w-full" : " w-[500px] lg:w-[700px] md:h-80"
+          }    object-cover transition-transform duration-300 group-hover:scale-110`}
           src={imageUrl}
           alt={model}
         />
@@ -75,7 +76,7 @@ const CarCard = ({ car, isTog }) => {
       </div>
 
       {/* Car Details Section */}
-      <div className="px-5 flex-1 relative pb-6">
+      <div className="px-5 flex-1 relative pb-5">
         <p
           className={`${
             isTog ? "" : "hidden"
@@ -125,7 +126,7 @@ const CarCard = ({ car, isTog }) => {
         </p>
         {/* Booking Button */}
         <Link to={`/carDetails/${_id}`}>
-          <button className="w-full py-3 mt-6 bg-[#ECF0F4] text-xl font-medium text-[#333] rounded-lg group-hover:bg-[#FF2C3B] transition-all group-hover:text-white duration-300">
+          <button className="w-full py-2 mt-6 bg-[#ECF0F4] text-lg font-medium text-[#333] rounded-lg group-hover:bg-[#FF2C3B] transition-all group-hover:text-white duration-300">
             Book Now
           </button>
         </Link>

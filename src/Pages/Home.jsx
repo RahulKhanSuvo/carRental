@@ -7,7 +7,7 @@ import WhyChooseUs from "../Components/WhyChooseUs";
 
 const Home = () => {
   return (
-    <div className="bg-[#FBFBFB]">
+    <div className="">
       <Banner></Banner>
       <WhyChooseUs></WhyChooseUs>
       <RecentListing></RecentListing>

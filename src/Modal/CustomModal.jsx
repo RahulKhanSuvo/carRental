@@ -2,9 +2,11 @@ import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { axiosInstance } from "../Hooks/AxiosInstance";
-const CustomModal = ({ isOpen, onClose, onlyCar }) => {
+import { useState } from "react";
+import { Zoom } from "react-awesome-reveal";
+const CustomModal = ({ isOpen, onClose, onlyCar, setCars, cars }) => {
   const { user } = useAuth();
-
+  const [isLoading, setLoading] = useState(false);
   const {
     _id,
     model,
@@ -16,6 +18,11 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     availability,
     features,
   } = onlyCar;
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
   if (!isOpen) return null;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +32,6 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     const initialData = Object.fromEntries(formData.entries());
     initialData.features = features;
 
-    // Validation logic
     if (!initialData.model.trim()) {
       Swal.fire({
         icon: "error",
@@ -93,11 +99,12 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
     };
 
     try {
+      setLoading(true);
       const { data } = await axiosInstance.patch(
         `/carUpdate/${_id}`,
         finalData
       );
-      // console.log(data);
+
       if (data.modifiedCount > 0) {
         Swal.fire({
           title: "Success!",
@@ -110,6 +117,10 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
           showCloseButton: true,
         });
         onClose();
+        setCars(
+          cars.map((car) => (car._id === _id ? { ...car, ...finalData } : car))
+        );
+        setLoading(false);
       } else {
         Swal.fire({
           icon: "warning",
@@ -122,6 +133,7 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
           timerProgressBar: true,
         });
       }
+      setLoading(false);
     } catch (error) {
       // console.error(error);
       Swal.fire({
@@ -140,166 +152,172 @@ const CustomModal = ({ isOpen, onClose, onlyCar }) => {
   };
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg p-6 w-80 md:w-auto">
-        <div className="lg:container mx-4 lg:mx-auto">
-          <div className="flex justify-between">
-            <h2 className="text-2xl font-bold mb-4">update your Car</h2>
-            <button onClick={onClose}>
-              <IoMdCloseCircleOutline size={30} />
-            </button>
-          </div>
-          <form onSubmit={handleSubmit}>
-            {/* Car Model */}
-            <div>
-              <label
-                className="font-medium text-gray-700 block"
-                htmlFor="carModel"
-              >
-                Car Model
-              </label>
-              <input
-                type="text"
-                name="model"
-                defaultValue={model}
-                placeholder="Enter car model"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-              />
+      <Zoom duration={400}>
+        <div className="bg-white rounded-lg p-6 max-h-screen overflow-y-auto ">
+          <div className="lg:container mx-4 lg:mx-auto">
+            <div className="flex justify-between">
+              <h2 className="text-2xl font-bold mb-4">Update your Car</h2>
+              <button onClick={onClose}>
+                <IoMdCloseCircleOutline size={30} />
+              </button>
             </div>
-            {/* Daily Rental Price */}
-            <div>
-              <label
-                htmlFor="dailyRentalPrice"
-                className="block font-medium text-gray-700"
-              >
-                Daily Rental Price
-              </label>
-              <input
-                type="number"
-                id="dailyRentalPrice"
-                name="dailyRentalPrice"
-                defaultValue={dailyRentalPrice}
-                placeholder="Enter daily rental price"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            {/* Availability */}
-            <div>
-              <label
-                htmlFor="availability"
-                className="block font-medium text-gray-700"
-              >
-                Availability
-              </label>
-              <select
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                name="availability"
-                defaultValue={availability}
-              >
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-              </select>
-            </div>
-            {/* Registration Number */}
-            <div>
-              <label
-                htmlFor="vehicleRegNumber"
-                className="block font-medium text-gray-700"
-              >
-                Vehicle Registration Number
-              </label>
-              <input
-                type="text"
-                id="vehicleRegNumber"
-                name="vehicleRegNumber"
-                defaultValue={vehicleRegNumber}
-                placeholder="Enter registration number"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            {/* Features */}
-            <div>
-              <label
-                htmlFor="features"
-                className="block font-medium text-gray-700"
-              >
-                Features
-              </label>
-              <div className="space-x-2">
-                {["GPS", "AC", "Bluetooth", "Sunroof", "Backup Camera"].map(
-                  (feature) => (
-                    <label key={feature} className="inline-flex items-center">
-                      <input
-                        type="checkbox"
-                        name="features"
-                        value={feature}
-                        defaultChecked={features.includes(feature)}
-                        className="form-checkbox h-5 w-5 text-blue-500"
-                      />
-                      <span className="ml-2 text-gray-700">{feature}</span>
-                    </label>
-                  )
-                )}
+            <form onSubmit={handleSubmit}>
+              {/* Car Model */}
+              <div>
+                <label
+                  className="font-medium text-gray-700 block"
+                  htmlFor="carModel"
+                >
+                  Car Model
+                </label>
+                <input
+                  type="text"
+                  name="model"
+                  defaultValue={model}
+                  placeholder="Enter car model"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                />
               </div>
-            </div>
-            {/* Description */}
-            <div>
-              <label
-                htmlFor="description"
-                className="block font-medium text-gray-700"
+              {/* Daily Rental Price */}
+              <div>
+                <label
+                  htmlFor="dailyRentalPrice"
+                  className="block font-medium text-gray-700"
+                >
+                  Daily Rental Price
+                </label>
+                <input
+                  type="number"
+                  id="dailyRentalPrice"
+                  name="dailyRentalPrice"
+                  defaultValue={dailyRentalPrice}
+                  placeholder="Enter daily rental price"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+              {/* Availability */}
+              <div>
+                <label
+                  htmlFor="availability"
+                  className="block font-medium text-gray-700"
+                >
+                  Availability
+                </label>
+                <select
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  name="availability"
+                  defaultValue={availability}
+                >
+                  <option value="Available">Available</option>
+                  <option value="Unavailable">Unavailable</option>
+                </select>
+              </div>
+              {/* Registration Number */}
+              <div>
+                <label
+                  htmlFor="vehicleRegNumber"
+                  className="block font-medium text-gray-700"
+                >
+                  Vehicle Registration Number
+                </label>
+                <input
+                  type="text"
+                  id="vehicleRegNumber"
+                  name="vehicleRegNumber"
+                  defaultValue={vehicleRegNumber}
+                  placeholder="Enter registration number"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+              {/* Features */}
+              <div>
+                <label
+                  htmlFor="features"
+                  className="block font-medium text-gray-700"
+                >
+                  Features
+                </label>
+                <div className="space-x-2">
+                  {["GPS", "AC", "Bluetooth", "Sunroof", "Backup Camera"].map(
+                    (feature) => (
+                      <label key={feature} className="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="features"
+                          value={feature}
+                          defaultChecked={features.includes(feature)}
+                          className="form-checkbox h-5 w-5 text-blue-500"
+                        />
+                        <span className="ml-2 text-gray-700">{feature}</span>
+                      </label>
+                    )
+                  )}
+                </div>
+              </div>
+              {/* Description */}
+              <div>
+                <label
+                  htmlFor="description"
+                  className="block font-medium text-gray-700"
+                >
+                  Description
+                </label>
+                <textarea
+                  defaultValue={description}
+                  id="description"
+                  name="description"
+                  placeholder="Enter car description"
+                  rows="4"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+              {/* Image URL */}
+              <div>
+                <label
+                  htmlFor="imageUrl"
+                  className="block font-medium text-gray-700"
+                >
+                  Image URL
+                </label>
+                <input
+                  type="url"
+                  id="imageUrl"
+                  defaultValue={imageUrl}
+                  name="imageUrl"
+                  placeholder="Enter image URL"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+              {/* Location */}
+              <div>
+                <label
+                  htmlFor="location"
+                  className="block font-medium text-gray-700"
+                >
+                  Location
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  defaultValue={location}
+                  placeholder="Enter location"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full flex justify-center items-center py-2 mt-4  bg-[#FF2C3B] border-[2.5px] transition duration-300 hover:bg-[#060605]  text-white rounded-md "
               >
-                Description
-              </label>
-              <textarea
-                defaultValue={description}
-                id="description"
-                name="description"
-                placeholder="Enter car description"
-                rows="4"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            {/* Image URL */}
-            <div>
-              <label
-                htmlFor="imageUrl"
-                className="block font-medium text-gray-700"
-              >
-                Image URL
-              </label>
-              <input
-                type="url"
-                id="imageUrl"
-                defaultValue={imageUrl}
-                name="imageUrl"
-                placeholder="Enter image URL"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            {/* Location */}
-            <div>
-              <label
-                htmlFor="location"
-                className="block font-medium text-gray-700"
-              >
-                Location
-              </label>
-              <input
-                type="text"
-                name="location"
-                defaultValue={location}
-                placeholder="Enter location"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full py-2 mt-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            >
-              Update
-            </button>
-          </form>
+                {isLoading ? (
+                  <div className="size-5 border-2 border-dashed rounded-full animate-spin border-white"></div>
+                ) : (
+                  "Update"
+                )}
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      </Zoom>
     </div>
   );
 };

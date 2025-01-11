@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import { format } from "date-fns";
 import { IoTrashOutline } from "react-icons/io5";
+import { FiAlertTriangle } from "react-icons/fi";
 import { FaCalendarAlt } from "react-icons/fa";
 import ModifyDate from "../Modal/ModifyDate";
 import { Bar } from "react-chartjs-2"; //
@@ -39,7 +40,13 @@ const MyBooking = () => {
       .get(`/my-bookings/${user.email}`)
       .then((res) => setBookings(res.data));
   }, [user.email, isDone, isModalOpen, axiosSecure]);
-
+  if (!bookings) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
   const handleModifyBooking = async (bookingId) => {
     try {
       const { data } = await axiosSecure.get(`/single-booking/${bookingId}`);
@@ -95,34 +102,14 @@ const MyBooking = () => {
   };
 
   return (
-    <div className="lg:container mx-auto p-4">
+    <div className="lg:container mx-auto  min-h-[calc(100vh)] p-4">
       <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
-
-      {/* Chart */}
-      {bookings.length > 0 && (
-        <div className="mb-8">
-          <Bar
-            data={chartData}
-            options={{
-              responsive: true,
-              plugins: {
-                title: {
-                  display: true,
-                  text: "Car Daily Rental Price",
-                },
-              },
-              scales: {
-                y: {
-                  title: {
-                    display: true,
-                    text: "Price ($)",
-                  },
-                  beginAtZero: true,
-                },
-              },
-            }}
-          />
-        </div>
+      {!bookings.length > 0 && (
+        <>
+          <h3 className="text-center flex justify-center text-[#F7767F] items-center gap-1">
+            <FiAlertTriangle /> Please book a car to view the chart
+          </h3>
+        </>
       )}
 
       {bookings.length > 0 ? (
@@ -237,7 +224,9 @@ const MyBooking = () => {
           ></ModifyDate>
         </div>
       ) : (
-        <p className="text-center text-gray-600 mt-6">No bookings found.</p>
+        <p className="text-center text-4xl text-gray-600 mt-6">
+          No bookings found.
+        </p>
       )}
     </div>
   );

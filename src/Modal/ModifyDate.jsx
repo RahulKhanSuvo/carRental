@@ -13,6 +13,7 @@ const ModifyDate = ({ isOpen, onClose, onlyBooking, setDone }) => {
     onlyBooking.dropoffDate ? new Date(onlyBooking.dropoffDate) : new Date()
   );
   const [totalPrice, setTotalPrice] = useState(0);
+
   useEffect(() => {
     if (pickup && dropoff) {
       const days = Math.ceil(

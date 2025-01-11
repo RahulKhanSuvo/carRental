@@ -40,6 +40,7 @@ const router = createBrowserRouter([
       {
         path: "/availableCar",
         element: <AvailableCars></AvailableCars>,
+        loader: () => fetch("http://localhost:3000/carsCount"),
       },
       {
         path: "/carDetails/:id",
