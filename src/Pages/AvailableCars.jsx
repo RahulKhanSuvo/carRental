@@ -96,7 +96,7 @@ const AvailableCars = () => {
         </div>
       </div>
 
-      {/* Cars Display Section */}
+    
       <div>
         {loading ? (
           <div className="flex justify-center min-h-[70vh] items-center h-64">
