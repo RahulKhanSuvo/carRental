@@ -6,7 +6,6 @@ import { IoTrashOutline } from "react-icons/io5";
 import { FiAlertTriangle } from "react-icons/fi";
 import { FaCalendarAlt } from "react-icons/fa";
 import ModifyDate from "../Modal/ModifyDate";
-import { Bar } from "react-chartjs-2"; //
 import {
   Chart as ChartJS,
   CategoryScale,
