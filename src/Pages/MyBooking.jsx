@@ -46,7 +46,7 @@ const MyBooking = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
+      <div className="flex justify-center  min-h-[100vh] items-center ">
         <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
       </div>
     );
@@ -92,14 +92,14 @@ const MyBooking = () => {
   };
 
   return (
-    <div className="lg:container mx-auto min-h-[calc(100vh)] p-4">
+    <div className="lg:container  mx-auto min-h-[calc(100vh)] p-4">
       <Helmet>
         <title>Carola | My Booking</title>
       </Helmet>
       <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
 
       {isLoading ? (
-        <div className="flex justify-center items-center h-64">
+        <div className="flex justify-center  items-center h-64">
           <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
         </div>
       ) : bookings.length > 0 ? (
