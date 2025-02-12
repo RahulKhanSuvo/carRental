@@ -1,41 +1,108 @@
-# Carola - Car Rental System
+# Carola - Car Rental System 🚗
 
-## Purpose
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Open-green?style=for-the-badge)](https://car-portal-rahul-khan-suvo.netlify.app/)
+
+<div align="center">
+  <img height="100%" src="https://i.ibb.co.com/G4ZY60N5/screely-1738736810638.png"  />
+</div>
+
+## Project Overview
 Carola is a user-friendly car rental platform that allows users to easily browse available cars, make bookings, and manage their bookings and listings. The platform supports secure user authentication, car management, and a seamless booking experience.
 
-## Live URL
-click here👉 [Caorla](https://car-portal-rahul-khan-suvo.netlify.app/)
+### 🚀 Technologies Used
+- **Frontend**: React, Tailwind CSS, Framer Motion  
+- **Backend**: Node.js, Express  
+- **Database**: MongoDB  
+- **Authentication**: Firebase, JWT  
+- **Hosting**: Vercel (Server), Netlify (Client)  
 
-## Key Features
-  
-1. **User Authentication**: Secure login and registration via email/password or Google authentication using Firebase.
+### 🔑 Core Features
+- 🔐 **Secure Auth**: Google login + email/password  
+- 🚗 **Car Listings Management**: Add/Edit/Delete cars with details  
+- 🔍 **Search & Sorting**: Filter cars by model, brand, or location  
+- 📅 **Booking System**: Book cars, modify dates, cancel bookings  
+- 🎨 **Responsive Design**: Optimized for all devices  
+- ⚠️ **Error Handling**: Custom 404 page with navigation  
 
-2. **Car Listings Management**: Authenticated users can add, edit, or delete their car listings, including details such as model, price, availability, and features.
+### 📦 Key Dependencies
+#### **Client**
+- `react-router-dom`
+- `axios`
+- `firebase`
+- `framer-motion`
+- `swiper`
+- `react-icons`
 
-3. **Search and Sorting**: Advanced search functionality to filter cars by model, brand, or location, with sorting options by price or date added.
+#### **Server**
+- `express`
+- `mongoose`
+- `cors`
+- `dotenv`
+- `jsonwebtoken`
 
-4. **Booking System**: Users can book cars, view booking details, modify dates, or cancel their bookings.
+### 🛠 Local Setup Guide
 
-5. **Responsive Design**: Fully responsive UI for a seamless experience on both desktop and mobile devices.
+#### **Prerequisites**
+- Node.js ≥16.x
+- MongoDB Atlas account
+- Firebase project
 
-6. **Error Handling**: Custom 404 error page with a "Back to Home" button for easy navigation.
+#### **1️⃣ Clone Repository**
+```bash
+git clone https://github.com/RahulKhanSuvo/carola.git
+cd carola
+```
 
-## NPM Packages Used
-- **`animate.css`**: Adds CSS animations to enhance the UI.
-- **`axios`**: Used for making HTTP requests to fetch or post data from the server.
-- **`chart.js`**: Creates interactive and responsive charts for data visualization.
-- **`date-fns`**: Provides utility functions for handling and formatting dates.
-- **`firebase`**: Implements user authentication and backend services.
-- **`framer-motion`**: Adds smooth animations and transitions for components.
-- **`motion`**: Enhances animations with gesture handling and spring-based transitions.
-- **`react`**: The core library for building the user interface.
-- **`react-chartjs-2`**: A React wrapper for `chart.js` to display charts.
-- **`react-countup`**: Creates animated number counters for stats or key figures.
-- **`react-datepicker`**: Adds a date picker component for selecting dates.
-- **`react-dom`**: Provides DOM-specific methods for rendering and updating the UI.
-- **`react-dropzone`**: Enables drag-and-drop file uploads for listing cars or other media.
-- **`react-icons`**: Offers a wide range of icons to enhance the UI.
-- **`react-intersection-observer`**: Tracks the visibility of elements for lazy loading or animations.
-- **`react-router-dom`**: Manages routing and navigation between pages.
-- **`react-sweetalert2`**: Displays customizable alert modals for better UX.
-- **`swiper`**: Creates interactive carousels and sliders for featured content.
+## 2️⃣ Install Dependencies
+
+### Client
+```bash
+cd client
+npm install
+```
+
+### Server
+```bash
+cd ../server
+npm install
+```
+
+## 3️⃣ Configure Environment Variables
+
+Create `.env` files inside both the client and server directories.
+
+### Client `.env`
+```ini
+REACT_APP_API_URL=http://localhost:5000
+REACT_APP_FIREBASE_API_KEY=your-firebase-api-key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
+REACT_APP_FIREBASE_PROJECT_ID=your-firebase-project-id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
+REACT_APP_FIREBASE_APP_ID=your-firebase-app-id
+```
+
+### Server `.env`
+```ini
+PORT=5000
+MONGO_URI=your-mongodb-connection-string
+JWT_SECRET=your-secret-key
+```
+Replace all `your-...` values with actual credentials.
+
+## 4️⃣ Start the Application
+
+### Run Backend
+```bash
+cd server
+npm start
+```
+This starts the backend server at `http://localhost:5000/`.
+
+### Run Frontend
+Open a new terminal, then:
+```bash
+cd client
+npm start
+```
+This starts the frontend at `http://localhost:3000/`. 

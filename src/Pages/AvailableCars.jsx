@@ -4,6 +4,7 @@ import { FaThList } from "react-icons/fa";
 import { IoGrid } from "react-icons/io5";
 import { axiosInstance } from "../Hooks/AxiosInstance";
 import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AvailableCars = () => {
   const [cars, setCars] = useState([]);
@@ -44,6 +45,9 @@ const AvailableCars = () => {
   return (
     <div className="lg:container mx-auto  min-h-[calc(100vh-500px) p-6">
       {/* Sorting and Search Section */}
+      <Helmet>
+        <title>available Car</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
         <div className="flex items-center space-x-4">
           <label className="font-medium text-xl">Sort By:</label>

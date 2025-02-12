@@ -4,9 +4,9 @@ import thumb from "../assets/thumb.png";
 import { Fade, JackInTheBox } from "react-awesome-reveal";
 const Banner = () => {
   return (
-    <div className="relative h-[70vh] w-full">
+    <div className="relative  h-[78vh] w-full">
       <video
-        className="w-full  top-0 left-0  h-full object-cover z-[-1]"
+        className="w-full top-0 left-0  h-full object-cover z-[-1]"
         autoPlay
         loop
         muted
@@ -24,7 +24,7 @@ const Banner = () => {
       >
         <div className="text-center max-w-5xl  text-white space-y-6">
           <Fade triggerOnce direction="down">
-            <h1 className="text-4xl capitalize  md:text-6xl lg:text-7xl font-bold drop-shadow-lg">
+            <h1 className="text-4xl capitalize  md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
               Elevate Every Journey – Drive Your Dreams Today!
             </h1>
           </Fade>

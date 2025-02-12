@@ -40,7 +40,8 @@ const router = createBrowserRouter([
       {
         path: "/availableCar",
         element: <AvailableCars></AvailableCars>,
-        loader: () => fetch("http://localhost:3000/carsCount"),
+        loader: () =>
+          fetch("https://car-rental-eight-beta.vercel.app/carsCount"),
       },
       {
         path: "/carDetails/:id",

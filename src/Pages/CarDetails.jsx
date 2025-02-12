@@ -10,6 +10,7 @@ import { GiCarDoor, GiGearStick } from "react-icons/gi";
 import { FaGasPump } from "react-icons/fa6";
 import { IoMdCheckmarkCircle } from "react-icons/io";
 import { axiosInstance } from "../Hooks/AxiosInstance";
+import { Helmet } from "react-helmet-async";
 
 const CarDetails = () => {
   const { user } = useAuth();
@@ -142,6 +143,9 @@ const CarDetails = () => {
 
   return (
     <div className="lg:container mx-auto md:p-6">
+      <Helmet>
+        <title>{model}</title>
+      </Helmet>
       <div className="grid gap-6 grid-cols-1 md:grid-cols-4">
         {/* Left Section: Car Details */}
         <div className="col-span-3">

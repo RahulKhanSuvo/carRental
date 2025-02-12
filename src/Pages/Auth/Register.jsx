@@ -2,6 +2,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "./SocialLogin";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const Register = () => {
   const { userRegistration, updateUser } = useAuth();
   const navigate = useNavigate();
@@ -88,6 +89,9 @@ const Register = () => {
 
   return (
     <div className=" min-h-screen pt-16 bg-gray-100">
+      <Helmet>
+        <title>Carola | Register</title>
+      </Helmet>
       <div className="w-full max-w-lg mx-auto  bg-white shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Create Your Account

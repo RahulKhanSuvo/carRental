@@ -1,6 +1,7 @@
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/UseAxios";
+import { Helmet } from "react-helmet-async";
 
 const AddCar = () => {
   const { user } = useAuth();
@@ -53,6 +54,9 @@ const AddCar = () => {
 
   return (
     <div className="lg:container mx-4 mt-5 lg:mx-auto">
+      <Helmet>
+        <title>Carola | Add car</title>
+      </Helmet>
       <h2 className="text-2xl  w-full font-bold mb-6 text-center">
         Add a New Car
       </h2>
@@ -313,7 +317,7 @@ const AddCar = () => {
         <div className="col-span-3 mt-6">
           <button
             type="submit"
-            className="w-full py-3 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-3 bg-[#FF2C3B] text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Save Car Details
           </button>

@@ -17,6 +17,7 @@ import {
   Legend,
 } from "chart.js";
 import useAxiosSecure from "../Hooks/UseAxios";
+import { Helmet } from "react-helmet-async";
 
 ChartJS.register(
   CategoryScale,
@@ -103,6 +104,9 @@ const MyBooking = () => {
 
   return (
     <div className="lg:container mx-auto  min-h-[calc(100vh)] p-4">
+      <Helmet>
+        <title>Carola | My Booking</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
       {!bookings.length > 0 && (
         <>
