@@ -48,7 +48,7 @@ const AvailableCars = () => {
       <Helmet>
         <title>available Car</title>
       </Helmet>
-      <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
+      <div className="flex flex-col lg:flex-row sm:gap-4 justify-between items-center mb-6">
         <div className="flex items-center space-x-4">
           <label className="font-medium text-xl">Sort By:</label>
           <select
