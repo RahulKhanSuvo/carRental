@@ -80,7 +80,7 @@ const AvailableCars = () => {
                   : "bg-[#FF2C3B] p-3 text-white rounded-md"
               }`}
             >
-              <FaThList size={30} />
+              <FaThList size={20} />
             </button>
             <button
               onClick={() => setTog(true)}
@@ -90,7 +90,7 @@ const AvailableCars = () => {
                   : "text-[#FF2C3B]"
               }`}
             >
-              <IoGrid size={35} />
+              <IoGrid size={20} />
             </button>
           </div>
         </div>
