@@ -3,7 +3,7 @@
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Open-green?style=for-the-badge)](https://car-portal-rahul-khan-suvo.netlify.app/)
 
 <div align="center">
-  <img height="100%" src="https://i.ibb.co.com/G4ZY60N5/screely-1738736810638.png"  />
+  <img  src="https://i.ibb.co.com/G4ZY60N5/screely-1738736810638.png"  />
 </div>
 
 ## Project Overview
