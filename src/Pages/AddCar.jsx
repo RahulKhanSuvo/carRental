@@ -53,7 +53,7 @@ const AddCar = () => {
   };
 
   return (
-    <div className="lg:container mx-4 mt-5 lg:mx-auto">
+    <div className="lg:container  mx-4 mt-5 lg:mx-auto">
       <Helmet>
         <title>Carola | Add car</title>
       </Helmet>
@@ -62,7 +62,7 @@ const AddCar = () => {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="lg:grid grid-cols-1 max-w-3xl w-full mx-auto  gap-6"
+        className="lg:grid grid-cols-1 max-w-3xl border p-6 rounded-lg w-full mx-auto  gap-6"
       >
         {/* Car Model */}
         <div className="">
