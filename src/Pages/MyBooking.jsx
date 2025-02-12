@@ -34,26 +34,31 @@ const MyBooking = () => {
   const [isDone, setDone] = useState("");
   const [onlyBooking, setOnlyBooking] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
+    setIsLoading(true); // Start loading
     axiosSecure
       .get(`/my-bookings/${user.email}`)
-      .then((res) => setBookings(res.data));
+      .then((res) => setBookings(res.data))
+      .finally(() => setIsLoading(false)); // Stop loading
   }, [user.email, isDone, isModalOpen, axiosSecure]);
-  if (!bookings) {
+
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
       </div>
     );
   }
+
   const handleModifyBooking = async (bookingId) => {
     try {
       const { data } = await axiosSecure.get(`/single-booking/${bookingId}`);
       setOnlyBooking(data);
       setIsModalOpen(true);
     } catch (error) {
-      // console.log(error);
+      console.error(error);
     }
   };
 
@@ -70,9 +75,7 @@ const MyBooking = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axiosSecure
-          .patch(`/booking-status/${bookingId}`, {
-            status,
-          })
+          .patch(`/booking-status/${bookingId}`, { status })
           .then(() => {
             Swal.fire(
               "Canceled!",
@@ -88,44 +91,28 @@ const MyBooking = () => {
     });
   };
 
-  const chartData = {
-    labels: bookings.map((booking) => booking.model),
-    datasets: [
-      {
-        label: "Daily Rental Price",
-        data: bookings.map((booking) => booking.totalPrice),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
-
   return (
-    <div className="lg:container mx-auto  min-h-[calc(100vh)] p-4">
+    <div className="lg:container mx-auto min-h-[calc(100vh)] p-4">
       <Helmet>
         <title>Carola | My Booking</title>
       </Helmet>
       <h2 className="text-2xl font-bold mb-4">My Bookings</h2>
-      {!bookings.length > 0 && (
-        <>
-          <h3 className="text-center flex justify-center text-[#F7767F] items-center gap-1">
-            <FiAlertTriangle /> Please book a car to view the chart
-          </h3>
-        </>
-      )}
 
-      {bookings.length > 0 ? (
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="loader border-t-4 border-b-4 border-[#FF2C3B] w-12 h-12 rounded-full animate-spin"></div>
+        </div>
+      ) : bookings.length > 0 ? (
         <div className="overflow-auto shadow-lg rounded-lg">
-          <table className="table text-center ">
+          <table className="table text-center">
             <thead className="text-center">
               <tr className="text-xl text-white bg-[#FF2C3B]">
-                <th className="">Car Image</th>
-                <th className="">Car Model</th>
-                <th className="">Booking Date</th>
-                <th className="">Total Price</th>
-                <th className="">Booking Status</th>
-                <th className="">Actions</th>
+                <th>Car Image</th>
+                <th>Car Model</th>
+                <th>Booking Date</th>
+                <th>Total Price</th>
+                <th>Booking Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -148,7 +135,6 @@ const MyBooking = () => {
                   </td>
                   <td className="border border-gray-300 p-4">
                     <div className="flex flex-col items-center space-y-2">
-                      {/* Pickup Date */}
                       <div className="flex items-center space-x-2">
                         <span className="text-blue-500 font-semibold">
                           Start:
@@ -161,7 +147,6 @@ const MyBooking = () => {
                         </span>
                       </div>
 
-                      {/* Drop-off Date */}
                       <div className="flex items-center space-x-2">
                         <span className="text-green-500 font-semibold">
                           End:
@@ -175,7 +160,6 @@ const MyBooking = () => {
                       </div>
                     </div>
                   </td>
-
                   <td className="border border-gray-300 p-3">
                     ${booking.totalPrice.toFixed(2)}
                   </td>
@@ -194,7 +178,6 @@ const MyBooking = () => {
                   </td>
                   <td className="border border-gray-300 p-3">
                     <div className="flex flex-wrap items-center justify-center gap-4">
-                      {/* Cancel Button */}
                       <button
                         onClick={() =>
                           handleCancelBooking(booking._id, "Canceled")
@@ -205,7 +188,6 @@ const MyBooking = () => {
                         <span>Cancel</span>
                       </button>
 
-                      {/* Modify Date Button */}
                       <button
                         onClick={() => handleModifyBooking(booking._id)}
                         className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-200 ease-in-out"
@@ -224,7 +206,7 @@ const MyBooking = () => {
             onlyBooking={onlyBooking}
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
-          ></ModifyDate>
+          />
         </div>
       ) : (
         <p className="text-center text-4xl text-gray-600 mt-6">
