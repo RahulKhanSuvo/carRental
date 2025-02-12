@@ -2,12 +2,14 @@ import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/UseAxios";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 
 const AddCar = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
+const [loading ,setLoading]=useState(false)
   const handleSubmit = async (e) => {
+    setLoading(true)
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -49,6 +51,8 @@ const AddCar = () => {
         icon: "error",
         confirmButtonText: "OK",
       });
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -317,7 +321,7 @@ const AddCar = () => {
         <div className="col-span-3 mt-6">
           <button
             type="submit"
-            className="w-full py-3 bg-[#FF2C3B] text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-3 bg-[#FF2C3B] text-white rounded-md shadow-md hover:bg-[#f7101f] focus:outline-none focus:ring-2 "
           >
             Save Car Details
           </button>
