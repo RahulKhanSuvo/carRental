@@ -7,9 +7,9 @@ import { useState } from "react";
 const AddCar = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-const [loading ,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -51,8 +51,8 @@ const [loading ,setLoading]=useState(false)
         icon: "error",
         confirmButtonText: "OK",
       });
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -319,41 +319,41 @@ const [loading ,setLoading]=useState(false)
 
         {/* Submit Button */}
         <div className="col-span-3 mt-6">
-        <button
-  type="submit"
-  disabled={loading}
-  className={`w-full bg-red-500 text-white font-semibold py-3 rounded-md shadow-md hover:bg-red-600 transition ${
-    loading ? "opacity-50 cursor-not-allowed" : ""
-  }`}
->
-  {loading ? (
-    <span className="flex items-center justify-center">
-      <svg
-        className="animate-spin h-5 w-5 mr-2 text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="4"
-        ></circle>
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4l-3 3-3-3h4z"
-        ></path>
-      </svg>
-      Saving...
-    </span>
-  ) : (
-    "Save Car Details"
-  )}
-</button>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full bg-red-500 text-white font-semibold py-3 rounded-md shadow-md hover:bg-red-600 transition ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            {loading ? (
+              <span className="flex items-center justify-center">
+                <svg
+                  className="animate-spin h-5 w-5 mr-2 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4l-3 3-3-3h4z"
+                  ></path>
+                </svg>
+                Saving...
+              </span>
+            ) : (
+              "Save Car Details"
+            )}
+          </button>
         </div>
       </form>
     </div>
