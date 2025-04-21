@@ -112,7 +112,7 @@ const NavBar = () => {
                 </button>
               </Link>
               <Link to={"/register"}>
-                <button className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-2 md:px-8 px-2 rounded  ">
+                <button className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-1 md:px-8 px-2 rounded  ">
                   Register
                 </button>
               </Link>
