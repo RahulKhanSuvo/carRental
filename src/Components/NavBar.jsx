@@ -94,7 +94,7 @@ const NavBar = () => {
                 <img
                   src={user?.photoURL}
                   alt="User Avatar"
-                  className="md:size-16 size-10 rounded-full border-2 border-gray-300"
+                  className="md:size-12 size-9 rounded-full border-2 border-gray-300"
                 />
               )}
               <button
