@@ -7,7 +7,7 @@ import FullScreenSpinner from "./FullScreenSpinner";
 
 const RecentListing = () => {
   const [cars, setCars] = useState([]);
-  const [loading, setLoading] = useState(true); // 👈 new loading state
+  const [loading, setLoading] = useState(true);
   const isTog = true;
 
   useEffect(() => {
