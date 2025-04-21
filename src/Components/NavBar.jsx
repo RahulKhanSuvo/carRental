@@ -29,40 +29,36 @@ const NavBar = () => {
       >
         Available Cars
       </NavLink>
-      {user && (
-        <>
-          <NavLink
-            to={"/addCar"}
-            className={({ isActive }) =>
-              isActive
-                ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-                : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
-            }
-          >
-            Add Car
-          </NavLink>
-          <NavLink
-            to={"/myCar"}
-            className={({ isActive }) =>
-              isActive
-                ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-                : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
-            }
-          >
-            My Cars
-          </NavLink>
-          <NavLink
-            to={"/myBookings"}
-            className={({ isActive }) =>
-              isActive
-                ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
-                : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
-            }
-          >
-            My Bookings
-          </NavLink>
-        </>
-      )}
+      <NavLink
+        to={"/addCar"}
+        className={({ isActive }) =>
+          isActive
+            ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
+            : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
+        }
+      >
+        Add Car
+      </NavLink>
+      <NavLink
+        to={"/myCar"}
+        className={({ isActive }) =>
+          isActive
+            ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
+            : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
+        }
+      >
+        My Cars
+      </NavLink>
+      <NavLink
+        to={"/myBookings"}
+        className={({ isActive }) =>
+          isActive
+            ? "text-[#FF2C3B] text-lg font-semibold transition-colors"
+            : "hover:text-[#FF2C3B] text-lg font-semibold transition-colors"
+        }
+      >
+        My Bookings
+      </NavLink>
     </>
   );
 

@@ -13,7 +13,7 @@ const RecentListing = () => {
       setCars(res.data);
     });
   }, []);
-
+  console.log(cars);
   return (
     <div>
       {/* Background Section */}

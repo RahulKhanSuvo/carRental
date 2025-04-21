@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import AuthContext from "../Context/AuthContext";
 import auth from "../firebase/firebase.config";
-import axios from "axios";
+
 import { axiosInstance } from "../Hooks/AxiosInstance";
 
 const AuthProvider = ({ children }) => {
