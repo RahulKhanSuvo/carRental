@@ -79,7 +79,7 @@ const NavBar = () => {
         {/* Logo */}
         <Link to={"/"}>
           {" "}
-          <img className="md:w-48 w-24" src={logo} alt="Logo" />
+          <img className="md:w-32 w-24" src={logo} alt="Logo" />
         </Link>
 
         {/* Links for lg */}
@@ -99,7 +99,7 @@ const NavBar = () => {
               )}
               <button
                 onClick={logOut}
-                className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-2 md:px-8 px-2 rounded "
+                className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-1 md:px-8 px-2 rounded "
               >
                 Logout
               </button>
@@ -107,7 +107,7 @@ const NavBar = () => {
           ) : (
             <div className="flex gap-4">
               <Link to={"/login"}>
-                <button className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-2 md:px-8 px-2 rounded  ">
+                <button className=" text-[#FF2C3B] md:text-lg border-[2.4px] border-[#FF2C3B] hover:bg-[#FF2C3B] transition duration-300 hover:text-white font-bold  md:py-1 md:px-8 px-2 rounded  ">
                   Sign In
                 </button>
               </Link>
