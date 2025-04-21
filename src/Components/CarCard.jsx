@@ -94,7 +94,7 @@ const CarCard = ({ car, isTog }) => {
           <FaLocationDot className="mr-2" /> <p>{location}</p>
         </div>
         {/*  */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 border-t border-b pt-4 pb-4 text-xl ">
+        <div className="grid grid-cols-2 border-t border-b pt-4 pb-4 text-xl ">
           <p className="flex gap-1  items-center">
             <MdOutlineAirlineSeatReclineNormal className="text-[#FF2C61]" />
             <span> {passengers}</span> Seats
