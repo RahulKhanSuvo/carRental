@@ -124,7 +124,7 @@ const AddCar = () => {
             htmlFor="vehicleRegNumber"
             className="block font-medium text-gray-700"
           >
-            Vehicle Registration Number
+            Registration Number
           </label>
           <input
             type="text"
