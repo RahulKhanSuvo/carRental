@@ -4,7 +4,7 @@ import thumb from "../assets/thumb.png";
 import { Fade, JackInTheBox } from "react-awesome-reveal";
 const Banner = () => {
   return (
-    <div className="relative  h-[70vh] w-full">
+    <div className="relative  h-[75vh] w-full">
       <video
         className="w-full top-0 left-0  h-full object-cover z-[-1]"
         autoPlay
