@@ -57,7 +57,7 @@ const AddCar = () => {
   };
 
   return (
-    <div className="lg:container  mx-4 mt-5 lg:mx-auto">
+    <div className="lg:container  mx-4 pt-5 lg:mx-auto">
       <Helmet>
         <title>Carola | Add car</title>
       </Helmet>
