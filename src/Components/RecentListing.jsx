@@ -3,6 +3,7 @@ import CarCard from "./CarCard";
 import bg from "../assets/bg-color-container-dodge2-testimonial.jpg";
 import { axiosInstance } from "../Hooks/AxiosInstance";
 import { Fade } from "react-awesome-reveal";
+import FullScreenSpinner from "./FullScreenSpinner";
 
 const RecentListing = () => {
   const [cars, setCars] = useState([]);
@@ -13,8 +14,10 @@ const RecentListing = () => {
       setCars(res.data);
     });
   }, []);
-  console.log(cars);
-  return (
+
+  return cars.length === 0 ? (
+    <FullScreenSpinner />
+  ) : (
     <div>
       {/* Background Section */}
       <div className="relative">
